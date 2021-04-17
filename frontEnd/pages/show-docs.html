@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/show-docs.css">
+
+
+  <title>Cline</title>
+</head>
+
+<body id="show-docs">
+
+  <div id="container">
+    <header class="page-header">
+
+      <div class="top-bar-container">
+        <a href="../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a>
+      </div>
+
+      <div class="header-content">
+        <strong>Esses são os médicos disponíveis.</strong>
+        <form id="search-docs">
+
+          <div class="input-block">
+            <label for="name">Nome</label>
+            <input name="name" id="name" type="text" value="">
+          </div>
+
+          <div class="input-block">
+            <label for="time">CRM</label>
+            <input name="time" id="time" type="text" value="">
+          </div>
+
+          <button type="submit">Buscar</button>
+
+        </form>
+      </div>
+
+    </header>
+
+    <main>
+
+        <article class="teacher-item">
+          
+          <header>
+            <div>
+              <strong>Alberto</strong>
+              <span>1551551</span>
+            </div>
+          </header>
+
+          <footer>
+            <button class="edit" type="submit">Editar</button>
+            <button class="delete" type="submit">Excluir</button>
+            
+            <!-- substituir valores para dinamicos-->
+            <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{ proffy.whatsapp }} &text=Tenho interesse na sua aula de {{ proffy.subject }} {{ proffy.name }}" class="button" target="_blank">
+              <img src="../public/images/icons/whatsapp.svg" alt="WhatsApp">
+              Entrar em contato
+            </a>
+          </footer>
+
+        </article>
+
+
+      
+
+    </main>
+  </div>
+
+</body>
+
+</html>
