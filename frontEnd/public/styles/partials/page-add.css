@@ -3,6 +3,10 @@
     height: 100vh;
 }
 
+#page-add-doc #container .input-block{
+    cursor: pointer;
+}
+
 #page-add-doc .page-header .header-content {
     margin-bottom: 6.4rem;
 }
