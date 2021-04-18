@@ -1,18 +1,17 @@
-let toggleMenuState = false;
 
-let toggleSidebar = function() {
-  let getSidebar = document.querySelector(".toggle-nav");
-  let getSidebarUl = document.querySelector(".toggle-nav ul");
-
-  if (toggleMenuState == false) {
-    getSidebar.style.width = "205px";
-    getSidebarUl.style.visibility = "visible";
-    getSidebarUl.style.opacity = "1";
-    toggleMenuState = true;
-  } else if (toggleMenuState == true) {
-    getSidebar.style.width = "60px";
-    getSidebarUl.style.opacity = "0";
-    getSidebarUl.style.visibility = "hidden";
-    toggleMenuState = false;
-  }
-}
+    $('.btn').click(function(){
+      $(this).toggleClass("click");
+      $('.sidebar').toggleClass("show");
+    });
+      $('.feat-btn').click(function(){
+        $('nav ul .feat-show').toggleClass("show");
+        $('nav ul .first').toggleClass("rotate");
+      });
+      $('.serv-btn').click(function(){
+        $('nav ul .serv-show').toggleClass("show1");
+        $('nav ul .second').toggleClass("rotate");
+      });
+      $('nav ul li').click(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+      });
+  
