@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/show-docs.css">
+
+
+  <title>Cline</title>
+</head>
+
+<body id="show-docs">
+
+  <!--A diferenca entre show-queries-status-users e show-queries-status-docs
+      seria de acordo com o login de cada um, por isso separei. Mas visualmente
+      sao identicos
+  -->
+
+  <div id="container">
+    <header class="page-header">
+
+      <div class="top-bar-container">
+        <a href="../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a>
+      </div>
+
+      <div class="header-content">
+        <strong>Essas são as consultas disponíveis.</strong>
+        <form id="search-docs">
+
+          <div class="input-block">
+            <label for="data">Data</label>
+            <input name="data" id="data" type="date" value="">
+          </div>
+
+          <div class="select-block">
+            <label for="status">Status</label>
+            <select name="status" required>
+                <option value="1">Pendente</option>
+                <option value="2">Atrasada</option>
+                <option value="3">Remarcada</option>
+                <option value="4">Realizada</option>
+            </select>
+          </div>
+
+          <button type="submit">Buscar</button>
+
+        </form>
+      </div>
+
+    </header>
+
+    <main>
+        <article class="med-item">   
+          <header>
+            <div>
+              <strong>Nome Paciente: Alberto</strong>
+              <span>Nome Medico: Alberto</span><br>
+              <p>Data da Consulta: 26/04/2021</p>
+              <p>Hora: 20:20</p>
+              <p>Status: Pendente</p>
+            </div>
+          </header>
+
+        </article>
+
+
+      
+
+    </main>
+  </div>
+
+</body>
+
+</html>
