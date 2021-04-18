@@ -18,7 +18,7 @@
     font: 1.6rem Archivo;
 }
 
-.input-block input {
+.input-block #email{
     width: 30rem;
 }
 
