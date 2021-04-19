@@ -35,7 +35,7 @@
 
       <div class="header-content">
         <strong>Essas são as consultas disponíveis.</strong>
-        <form id="search-docs">
+        <form id="search-docs" method="POST" >
 
           <div class="input-block">
             <label for="nomePacinete">Nome do Paciente</label>
@@ -47,7 +47,7 @@
             <input name="nomeMedico" id="nomeMedico" type="text" value="">
           </div>
 
-          <button type="submit">Buscar</button>
+          <button type="submit" form="search-docs">Buscar</button>
 
         </form>
       </div>

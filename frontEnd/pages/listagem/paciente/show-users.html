@@ -36,7 +36,7 @@
 
       <div class="header-content">
         <strong>Esses são os pacientes disponíveis.</strong>
-        <form id="search-docs">
+        <form id="search-docs" method="POST">
 
           <div class="input-block">
             <label for="name">Nome</label>
@@ -48,7 +48,7 @@
             <input name="cpf" id="cpf" type="text" value="">
           </div>
 
-          <button type="submit">Buscar</button>
+          <button type="submit" form="search-docs">Buscar</button>
 
         </form>
       </div>
