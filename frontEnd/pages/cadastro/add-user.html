@@ -55,7 +55,7 @@
 
           <div class="input-block">
             <label for="endereco">Endereço</small> </label>
-            <input name="endereco" id="endereco" type="url" required>
+            <input name="endereco" id="endereco" type="text" required>
           </div>
 
           <div class="input-block">
@@ -75,7 +75,7 @@
 
           <div class="input-block">
             <label for="telefone">Telefone (Whatsapp)</small> </label>
-            <input name="telefone" id="telefone" required>
+            <input name="telefone" id="telefone" type="number" required>
           </div>
 
           <div class="input-block">
@@ -102,11 +102,11 @@
             <img src="../../public/images/icons/warning.svg" alt="Aviso importante">
             Importante <br> Preencha todos os dados
           </p>
-          <button type="submit" form="create-user">Salvar cadastro</button>
+          <button type="submit" form="create-user" onclick="cadastrar()">Salvar cadastro</button>
         </footer>
     </main>
   </div>
-
+  <script type="text/javascript" src="../../scripts/eventsButtons.js"></script>
 </body>
 
-</html>
+</html> 

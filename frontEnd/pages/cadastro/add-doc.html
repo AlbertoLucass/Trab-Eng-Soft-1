@@ -54,19 +54,19 @@
 
           <div class="input-block">
             <label for="crm">CRM</small> </label>
-            <input name="crm" id="crm" type="url" required>
+            <input name="crm" id="crm" type="text" required>
           </div>
 
           <div class="input-block">
             <label for="cpf">CPF</small> </label>
-            <input name="cpf" id="cpf" required>
+            <input name="cpf" id="cpf" type="number" required>
           </div>
 
           <div class="input-block">
             <label for="telefone">Telefone (Whatsapp)</small> </label>
-            <input name="telefone" id="telefone" required>
+            <input name="telefone" id="telefone" type="number" required >
           </div>
-
+ 
           <div class="input-block">
             <label for="data">Data de Nascimento</small> </label>
             <input name="data" id="data"  type="date" required>
@@ -79,7 +79,7 @@
 
           <div class="input-block">
             <label for="senha">Senha</small> </label>
-            <input name="senha" id="senha" type="password" required>
+            <input name="senha" id="senha" type="text" required>
           </div>
 
         </fieldset>
@@ -127,11 +127,12 @@
             <img src="../../public/images/icons/warning.svg" alt="Aviso importante">
             Importante <br> Preencha todos os dados
           </p>
-          <button type="submit" form="create-doc">Salvar cadastro</button>
+          <button type="submit" form="create-doc" onclick="cadastrar()">Salvar cadastro</button>
         </footer>
     </main>
   </div>
   <script type="text/javascript" src="../../scripts/addField.js"></script>
+  <script type="text/javascript" src="../../scripts/eventsButtons.js"></script>
 </body>
 
 </html>
