@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../public/styles/partials/show-docs.css">
+
+
+  <title>Cline</title>
+</head>
+
+<body id="show-docs">
+
+  <div id="container">
+    <header class="page-header">
+
+      <div class="top-bar-container">
+        <a href="menu.html">
+          <img src="../public/images/icons/back.svg" alt="Voltar">
+        </a>
+        <a href="../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a>
+      </div>
+
+      <div class="header-content">
+        <strong>Esses são os pacientes disponíveis.</strong>
+        <form id="search-docs">
+
+          <div class="input-block">
+            <label for="name">Nome</label>
+            <input name="name" id="name" type="text" value="">
+          </div>
+
+          <div class="input-block">
+            <label for="cpf">CPF</label>
+            <input name="cpf" id="cpf" type="text" value="">
+          </div>
+
+          <button type="submit">Buscar</button>
+
+        </form>
+      </div>
+
+    </header>
+
+    <main>
+
+        <article class="med-item">
+          
+          <header>
+            <div>
+              <strong>Nome: Alberto</strong>
+              <span>CPF:111111</span><br>
+              <p>Endereço: Lauro de Freitas</p>
+              <p>Rg:77777</p>
+              <p>Estado Civil: Solteiro</p>
+              <p>Telefone: 73 999999999</p>
+              <p>Data de Nascimento: 28/12/1900</p>
+            </div>
+          </header>
+
+          <footer>
+            <button class="edit" type="submit">Editar</button>
+            <button class="delete" type="submit">Excluir</button>
+            
+            <!-- substituir valores para dinamicos-->
+            <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{ whatsapp }} &text=Olá Sr.(a), A sua consulta precisará ser remarcada." class="button" target="_blank">
+              <img src="../public/images/icons/whatsapp.svg" alt="WhatsApp">
+              Entrar em contato
+            </a>
+          </footer>
+
+        </article>
+
+
+      
+
+    </main>
+  </div>
+
+</body>
+
+</html>
