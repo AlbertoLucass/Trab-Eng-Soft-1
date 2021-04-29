@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cline</title>
+  <link rel="stylesheet" type="text/css" href="../../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/page-add.css">
+
+ 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+
+</head> 
+
+<body id="page-add-doc">
+
+  <div id="container">
+    <header class="page-header" Fseus>
+
+      <div class="top-bar-container">
+        <a href="../menu/menu.html">
+          <img src="../../public/images/icons/back.svg" alt="Voltar">
+        </a>
+        <a href="../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a> 
+
+      </div>
+
+      <div class="header-content">
+        <strong>Editar Médico</strong>
+        <p>Olá Admin, o primeiro passo, é preencher esse
+          formulário.</p>
+
+      </div>
+    </header>
+
+    <main>
+      <form action="" id="create-doc" method="POST">
+        <!--action="/save-classes" id="create-class" method="POST"-->
+        <fieldset>
+          <legend>Dados do Médico</legend>
+
+          <div class="input-block">
+            <label for="nome">Nome</label>
+            <input name="nome" id="nome" required>
+          </div>
+
+          <div class="input-block">
+            <label for="crm">CRM</small> </label>
+            <input name="crm" id="crm" type="text" required>
+          </div>
+
+          <div class="input-block">
+            <label for="cpf">CPF</small> </label>
+            <input name="cpf" id="cpf" type="number" required>
+          </div>
+
+          <div class="input-block">
+            <label for="telefone">Telefone (Whatsapp)</small> </label>
+            <input name="telefone" id="telefone" type="number" required >
+          </div>
+ 
+          <div class="input-block">
+            <label for="data">Data de Nascimento</small> </label>
+            <input name="data" id="data"  type="date" required>
+          </div>
+
+          <div class="input-block">
+            <label for="login">Login</small> </label>
+            <input name="login" id="login" type="text" required>
+          </div>
+
+          <div class="input-block">
+            <label for="senha">Senha</small> </label>
+            <input name="senha" id="senha" type="text" required>
+          </div>
+
+        </fieldset>
+
+        <fieldset id="schedule-items">
+          <legend> Horários disponíveis
+            <button type="button" id="add-time">+ Novo Horário</button>
+          </legend>
+          <div class="schedule-item">
+            <div class="select-block">
+              <label for="diaDaSemana">Dia da semana</label>
+              <select name="diaDaSemana" required>
+                <option value="">Selecione uma opção</option>
+                  <option value="1">Domingo</option>
+                  <option value="2">Segunda-feira</option>
+                  <option value="3">Terça-feira</option>
+                  <option value="4">Quarta-feira</option>
+                  <option value="5">Quinta-feira</option>
+                  <option value="6">Sexta-feira</option>
+                  <option value="7">Sábado</option>
+              </select>
+            </div>
+
+
+            <!--aqui talvez precise mudar o name-->
+            <div class="input-block">
+              <label for="time_from">Das</label>
+              <input type="time" name="time_from[]" required>
+            </div>
+
+            <div class="input-block">
+              <label for="time_to">Até</label>
+              <input type="time" name="time_to[]" required>
+            </div>
+          
+          </div>
+          
+        </fieldset>
+
+      </form>
+
+
+        <footer>
+          <p>
+            <img src="../../public/images/icons/warning.svg" alt="Aviso importante">
+            Importante <br> Preencha todos os dados
+          </p>
+          <button type="submit" form="create-doc" onclick="cadastrar()">Salvar mudanças</button>
+        </footer>
+    </main>
+  </div>
+  <script type="text/javascript" src="../../scripts/addField.js"></script>
+  <script type="text/javascript" src="../../scripts/eventsButtons.js"></script>
+</body>
+
+</html>

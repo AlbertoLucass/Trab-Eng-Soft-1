@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cline</title>
+  <link rel="stylesheet" type="text/css" href="../../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../../public/styles/partials/page-add.css">
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+
+</head>
+ 
+<body id="page-add-doc">
+
+  <div id="container">
+    <header class="page-header" Fseus>
+
+      <div class="top-bar-container">
+        <a href="../menu/menu.html">
+          <img src="../../public/images/icons/back.svg" alt="Voltar">
+        </a>
+        <a href="../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a>
+
+      </div>
+
+      <div class="header-content">
+        <strong>Adicionar Consulta</strong>
+        <p>Olá Admin, o primeiro passo, é preencher esse
+          formulário.</p>
+
+      </div>
+    </header>
+
+
+    <main>
+      <form action="" id="create-query" method="POST" autocomplete="off">
+
+        <!--action="/save-classes" id="create-query" method="POST"-->
+        <fieldset>
+          <legend>Dados da Consulta</legend>
+
+          <!--colocar dinamicamente"-->
+      
+          <div class="input-block" >
+            <label for="paciente">Paciente</label>
+            <input id="paciente" type="text" name="paciente" placeholder="Procure aqui...">
+          </div>
+    
+          
+          <!--colocar dinamicamente"-->
+
+          <div class="input-block" >
+            <label for="medico">Médico</label>
+            <input id="medico" type="text" name="medico" placeholder="Procure aqui...">
+          </div>
+
+          <!--testar se dia esta disponivel"-->
+
+          <div class="input-block">
+            <label for="data">Data</small> </label>
+            <input name="data" id="data"  type="date" required>
+          </div>
+
+          <!--testar se hora esta disponivel"--> 
+          
+          <div class="input-block">
+            <label for="hour">Hora</small> </label>
+            <input type="time" name="tempo" id="tempo" required>
+          </div>
+
+          <div class="select-block">
+            <label for="status">Status</label>
+            <select name="status" required>
+                <option value="1">Pendente</option>
+                <option value="2">Atrasada</option>
+                <option value="3">Remarcada</option>
+                <option value="4">Realizada</option>
+            </select>
+          </div>
+        </fieldset>
+      </form> 
+
+        <footer>
+          <p>
+            <img src="../../public/images/icons/warning.svg" alt="Aviso importante">
+            Importante <br> Preencha todos os dados
+          </p>
+          <button type="submit" form="create-query" onclick="cadastrar()">Salvar cadastro</button>
+        </footer>
+    </main>
+  </div>
+  <script type="text/javascript" src="../../scripts/search-pat-doc.js"></script>
+  <script type="text/javascript" src="../../scripts/eventsButtons.js"></script>
+</body>
+
+</html> 
