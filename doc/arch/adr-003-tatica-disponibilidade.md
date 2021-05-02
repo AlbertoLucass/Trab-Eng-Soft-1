@@ -2,7 +2,7 @@
 
 ## Status
 
-Aceito
+Pendente
 
 ## Context
 
