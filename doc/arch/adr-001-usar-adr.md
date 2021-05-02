@@ -11,8 +11,8 @@ Centralização de documentação do projeto Cline para matéria MATA62 - ES1 - 
 
 ## Decision
 
-What is the change that we're proposing and/or doing?
+Utilizar ADRs como mecanismos de organização da documentação do projeto a ser desenvolvido.
 
 ## Consequences
 
-What becomes easier or more difficult to do because of this change?
+A documentação foi centralizada em arquivos do tipo Markdown que descrevem as decisões arquiteturais tomadas pela equipe ao longo do processo, facilitando o desenvolvimento do mesmo de forma alinhada.
