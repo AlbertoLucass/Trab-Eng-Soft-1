@@ -10,9 +10,9 @@ Manutenções demandam tempo e corpo técnico para serem realizadas, torna-se ne
 
 ## Decision
 
-  *Pastas foram separadas de acordo com sua funcionalidade
-  *Escolha de design simples e reutilizável
-  *Documentação completa
+  * Pastas foram separadas de acordo com sua funcionalidade
+  * Escolha de design simples e reutilizável
+  * Documentação completa
 
 ## Consequences
 
