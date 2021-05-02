@@ -15,7 +15,7 @@ A modificabilidade foi implementada em 4 partes:
 
 * Redução de tamanho dos módulos
 
-    Verificar adr-005
+    Verificar adr-012
     
 * Coesão
 
