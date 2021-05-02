@@ -8,6 +8,7 @@ Aceito
 ## Context
 
 Centralização de documentação do projeto Cline para matéria MATA62 - ES1 - 2021.1, de forma a integrar toda equipe no desenvolvimento do projeto.
+Evitar desalinhamentos de desenvolvimento em home-office.
 
 ## Decision
 
