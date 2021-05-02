@@ -1,5 +1,5 @@
 
-# Utilização de ADRs
+# Utilização de GitHub
 
 ## Status
 
@@ -7,12 +7,14 @@ Aceito
 
 ## Context
 
-Centralização de documentação do projeto Cline para matéria MATA62 - ES1 - 2021.1, de forma a integrar toda equipe no desenvolvimento do projeto.
+Centralização de código do projeto para desenvolvimento em home office.
 
 ## Decision
 
-Utilizar ADRs como mecanismos de organização da documentação do projeto a ser desenvolvido.
+Utilizar a plataforma GitHub para centralização do projeto, facilitando acesso, edição de código e documentação.
+Utilizar único branch para desenvolvimento.
 
 ## Consequences
 
-A documentação foi centralizada em arquivos do tipo Markdown que descrevem as decisões arquiteturais tomadas pela equipe ao longo do processo, facilitando o desenvolvimento do mesmo de forma alinhada.
+Código e documentação foi centralizada em branch único tornando mais fácil o desenvolvimento geral do projeto.
+Único branch poderia dificultar o desenvolvimento *realtime*, porém como cada integrante ficou responsável por uma parte do projeto isso não afetaria o mesmo.
