@@ -14,7 +14,9 @@ Custos para realizar alterações no sistema podem inviabilizar manutenção e c
 A modificabilidade foi implementada em 4 partes:
 
 * Redução de tamanho dos módulos
+
     Verificar adr-005
+    
 * Coesão
     Aumento de coesão para que o uso da aplicação fique harmonioso e intuitivo, buscando uma melhor usabilidade
 * Acoplamento
