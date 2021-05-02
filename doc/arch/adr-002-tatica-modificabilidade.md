@@ -18,10 +18,15 @@ A modificabilidade foi implementada em 4 partes:
     Verificar adr-005
     
 * Coesão
+
     Aumento de coesão para que o uso da aplicação fique harmonioso e intuitivo, buscando uma melhor usabilidade
+    
 * Acoplamento
+
     Divisão das funções em partes com intuito de diminuir o acoplamento de arquivos
+    
 * Adiamento de tempo preso
+
     Foi evitado a inserção de muitas dependências na aplicação
 
 ## Consequences
