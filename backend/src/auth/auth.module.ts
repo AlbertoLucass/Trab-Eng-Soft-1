@@ -4,6 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AdministrationService } from '../administration/administration.service';
 import { DoctorService } from '../doctor/doctor.service';
 import { PatientService } from '../patient/patient.service';
+import { PrismaModule } from '../prisma/prisma.module';
 import { jwtConstants } from './auth.constraint';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
@@ -12,6 +13,7 @@ import { RolesGuard } from './roles.guard';
 
 @Module({
   imports: [
+    PrismaModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

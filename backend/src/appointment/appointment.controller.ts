@@ -16,7 +16,6 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Roles } from '../auth/roles.decorator';
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { FilterAppointmentDto } from './dto/filter-appointment.dto';
@@ -51,7 +50,6 @@ export class AppointmentController {
   findOne(@Param() findOneAppointmentDto: FindOneAppointmentDto) {
     return this.appointmentService.findOne(findOneAppointmentDto);
   }
-  @Roles(Role.ADMIN)
   @Patch(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()

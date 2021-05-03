@@ -15,13 +15,11 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Roles } from '../auth/roles.decorator';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { FindOneDoctorDto } from './dto/find-one-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
-@Roles(Role.ADMIN)
 @ApiTags('doctor')
 @Controller('doctor')
 export class DoctorController {

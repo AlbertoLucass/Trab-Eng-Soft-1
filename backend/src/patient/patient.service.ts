@@ -1,6 +1,6 @@
 import { Patient } from '.prisma/client';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { toFormat, toHash } from '../util';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { FindPatientDto } from './dto/find-patient.dto';

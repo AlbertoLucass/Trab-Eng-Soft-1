@@ -1,6 +1,6 @@
 import { Clinic } from '.prisma/client';
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateClinicDto } from './dto/create-clinic.dto';
 import { UpdateClinicDto } from './dto/update-clinic.dto';
 
@@ -16,8 +16,12 @@ export class ClinicService {
     return this.prisma.clinic.findMany();
   }
 
-  findOne(id: string): Promise<Clinic> {
-    return this.prisma.clinic.findUnique({ where: { id } });
+  async findOne(id: string): Promise<Clinic> {
+    const clinic = await this.prisma.clinic.findUnique({ where: { id } });
+    if (!clinic) {
+      throw new NotFoundException();
+    }
+    return clinic;
   }
 
   update(id: string, updateClinicDto: UpdateClinicDto): Promise<Clinic> {

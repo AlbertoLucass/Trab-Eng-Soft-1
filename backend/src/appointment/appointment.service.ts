@@ -1,6 +1,6 @@
 import { Appointment } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { toFormat } from '../util';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { FindOneAppointmentDto } from './dto/find-one-appointment.dto';
