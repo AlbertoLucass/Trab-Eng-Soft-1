@@ -9,6 +9,13 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Roles } from '../auth/roles.decorator';
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
@@ -16,26 +23,39 @@ import { FilterAppointmentDto } from './dto/filter-appointment.dto';
 import { FindOneAppointmentDto } from './dto/find-one-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
+@ApiTags('appointments')
 @Controller('appointment')
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
   @Post()
+  @ApiCreatedResponse()
+  @ApiNotFoundResponse()
+  @ApiBadRequestResponse()
   create(@Body() createAppointmentDto: CreateAppointmentDto) {
     return this.appointmentService.create(createAppointmentDto);
   }
 
   @Get()
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @ApiBadRequestResponse()
   findAll(@Query() filterAppointmentDto: FilterAppointmentDto) {
     return this.appointmentService.findAll(filterAppointmentDto);
   }
 
   @Get(':id')
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @ApiBadRequestResponse()
   findOne(@Param() findOneAppointmentDto: FindOneAppointmentDto) {
     return this.appointmentService.findOne(findOneAppointmentDto);
   }
   @Roles(Role.ADMIN)
   @Patch(':id')
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @ApiBadRequestResponse()
   update(
     @Param() findOneAppointmentDto: FindOneAppointmentDto,
     @Body() updateAppointmentDto: UpdateAppointmentDto,
@@ -47,6 +67,9 @@ export class AppointmentController {
   }
 
   @Delete(':id')
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @ApiBadRequestResponse()
   remove(@Param() findOneAppointmentDto: FindOneAppointmentDto) {
     return this.appointmentService.remove(findOneAppointmentDto);
   }

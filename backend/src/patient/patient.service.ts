@@ -22,6 +22,14 @@ export class PatientService {
     } = createPatientDto;
     const formattedBirthDay = toFormat(birthday);
     const hash = await toHash(password);
+    const clinic = await this.prisma.clinic.findUnique({
+      where: { id: clinicId },
+    });
+
+    if (!clinic) {
+      throw new NotFoundException('Clinic Not Found');
+    }
+
     return this.prisma.patient.create({
       data: {
         Address: {
