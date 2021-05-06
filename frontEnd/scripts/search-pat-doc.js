@@ -1,5 +1,5 @@
 var pacientes = ["Alberto", "Gustavo", "Danilo", "Pedro"];
-var medicos = ["aaa", "ggg", "ddd", "ppp"];
+var medicos = ["Alberto", "Gustavo", "Danilo", "Pedro"];
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
