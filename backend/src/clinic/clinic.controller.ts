@@ -18,48 +18,51 @@ import { ClinicService } from './clinic.service';
 import { CreateClinicDto } from './dto/create-clinic.dto';
 import { UpdateClinicDto } from './dto/update-clinic.dto';
 
-@ApiTags('clinic')
+@ApiTags('Clinic')
 @Controller('clinic')
 export class ClinicController {
   constructor(private readonly clinicService: ClinicService) {}
 
   @Post()
-  @ApiCreatedResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiCreatedResponse({ description: 'Created successfully' })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
   create(@Body() createClinicDto: CreateClinicDto) {
     return this.clinicService.create(createClinicDto);
   }
 
   @Get()
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Returns all clinics' })
   findAll() {
     return this.clinicService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Return the clinic that has the id' })
+  @ApiNotFoundResponse({ description: "Couldn't find clinic with the id" })
+  @ApiBadRequestResponse({ description: "Didn't pass the id" })
   findOne(@Param('id') id: string) {
     return this.clinicService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Patch with success' })
+  @ApiNotFoundResponse({ description: "Didn't find the clinic with the id" })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
   update(@Param('id') id: string, @Body() updateClinicDto: UpdateClinicDto) {
     return this.clinicService.update(id, updateClinicDto);
   }
 
   @Delete(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  remove(@Param('id') id: string) {
+  @ApiOkResponse({ description: 'Deleted clinic with success' })
+  @ApiNotFoundResponse({ description: "Couldn't find clinic" })
+  deactivate(@Param('id') id: string) {
     return this.clinicService.remove(id);
+  }
+
+  @Post('/reactivate/:id')
+  @ApiOkResponse({ description: 'Reactivated clinic with success' })
+  @ApiNotFoundResponse({ description: "Couldn't find clinic" })
+  reactivate(@Param('id') id: string) {
+    return this.clinicService.reactivate(id);
   }
 }

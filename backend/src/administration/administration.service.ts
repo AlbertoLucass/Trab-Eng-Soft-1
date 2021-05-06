@@ -8,14 +8,6 @@ import { UpdateAdministrationDto } from './dto/update-administration.dto';
 export class AdministrationService {
   constructor(private readonly prisma: PrismaService) {}
 
-  login() {
-    throw new Error('Method not implemented.');
-  }
-
-  signUp() {
-    throw new Error('Method not implemented.');
-  }
-
   async create(createAdministrationDto: CreateAdministrationDto) {
     const hash = await toHash(createAdministrationDto.password);
     return this.prisma.adminstration.create({

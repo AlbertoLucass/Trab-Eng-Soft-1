@@ -13,7 +13,6 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
-  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { AdministrationService } from './administration.service';
 import { CreateAdministrationDto } from './dto/create-administration.dto';
@@ -25,13 +24,14 @@ export class AdministrationController {
   constructor(private readonly administrationService: AdministrationService) {}
 
   @Post()
-  @ApiCreatedResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiCreatedResponse({ description: 'Creates a new admin' })
+  @ApiNotFoundResponse({ description: "Couldn't find clinic" })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
   create(@Body() createAdministrationDto: CreateAdministrationDto) {
     return this.administrationService.create(createAdministrationDto);
   }
 
+  //#TODO: Need to be logged in
   @Get()
   @ApiOkResponse()
   @ApiNotFoundResponse()
@@ -40,7 +40,7 @@ export class AdministrationController {
     return this.administrationService.findAll();
   }
 
-  @Get(':id:email')
+  @Get(':id/:email')
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @ApiBadRequestResponse()
@@ -48,6 +48,7 @@ export class AdministrationController {
     return this.administrationService.findOne(id, email);
   }
 
+  //#TODO: need to be logged in
   @Patch(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()
@@ -59,26 +60,12 @@ export class AdministrationController {
     return this.administrationService.update(id, updateAdministrationDto);
   }
 
+  //#TODO: need to be logged in
   @Delete(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @ApiBadRequestResponse()
   remove(@Param('id') id: string) {
     return this.administrationService.remove(id);
-  }
-
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  signUp() {
-    return this.administrationService.signUp();
-  }
-
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  @ApiUnauthorizedResponse()
-  login() {
-    return this.administrationService.login();
   }
 }

@@ -15,20 +15,21 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Roles } from '../auth/roles.decorator';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { FindOneDoctorDto } from './dto/find-one-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
-@ApiTags('doctor')
+@ApiTags('Doctor')
 @Controller('doctor')
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
   @Post()
-  @ApiCreatedResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiCreatedResponse({ description: 'Creates a doctor' })
+  @ApiNotFoundResponse({ description: "Couldn't find this clinic" })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
   create(@Body() createDoctorDto: CreateDoctorDto) {
     return this.doctorService.create(createDoctorDto);
   }
@@ -41,6 +42,8 @@ export class DoctorController {
     return this.doctorService.findAll();
   }
 
+  //#TODO: need to be logged in
+  @Roles(Role.ADMIN, Role.DOCTOR)
   @Get(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()
@@ -49,6 +52,7 @@ export class DoctorController {
     return this.doctorService.findOne(findOneDoctorDto);
   }
 
+  //#TODO: need to be logged in
   @Patch(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()
@@ -60,6 +64,8 @@ export class DoctorController {
     return this.doctorService.update(findOneDoctorDto, updateDoctorDto);
   }
 
+  //#TODO: need to be an admin
+  @Roles(Role.ADMIN)
   @Delete(':id')
   @ApiOkResponse()
   @ApiNotFoundResponse()

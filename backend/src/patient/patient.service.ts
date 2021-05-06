@@ -1,5 +1,9 @@
 import { Patient } from '.prisma/client';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { toFormat, toHash } from '../util';
 import { CreatePatientDto } from './dto/create-patient.dto';
@@ -51,6 +55,11 @@ export class PatientService {
   }
 
   async findOne(findPatientDto: FindPatientDto): Promise<Patient> {
+    if (
+      !Object.values(findPatientDto).some((value) => typeof value === 'string')
+    ) {
+      throw new BadRequestException('You need to provide at least a query');
+    }
     const patient = await this.prisma.patient.findUnique({
       where: findPatientDto,
     });
@@ -61,7 +70,7 @@ export class PatientService {
   }
 
   async update(
-    findPatientDto: FindPatientDto,
+    id: string,
     updatePatientDto: UpdatePatientDto,
   ): Promise<Patient> {
     if (updatePatientDto.password) {
@@ -69,7 +78,7 @@ export class PatientService {
     }
     return this.prisma.patient.update({
       data: updatePatientDto,
-      where: findPatientDto,
+      where: { id },
     });
   }
 

@@ -4,6 +4,11 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateClinicDto } from './dto/create-clinic.dto';
 import { UpdateClinicDto } from './dto/update-clinic.dto';
 
+export interface PartialClinic {
+  name: string;
+  phone: string;
+  id: string;
+}
 @Injectable()
 export class ClinicService {
   constructor(private readonly prisma: PrismaService) {}
@@ -12,8 +17,14 @@ export class ClinicService {
     return this.prisma.clinic.create({ data: createClinicDto });
   }
 
-  findAll(): Promise<Clinic[]> {
-    return this.prisma.clinic.findMany();
+  findAll(): Promise<PartialClinic[]> {
+    return this.prisma.clinic.findMany({
+      select: {
+        id: true,
+        name: true,
+        phone: true,
+      },
+    });
   }
 
   async findOne(id: string): Promise<Clinic> {
