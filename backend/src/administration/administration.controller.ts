@@ -1,3 +1,4 @@
+import { Role } from '.prisma/client';
 import {
   Controller,
   Get,
@@ -6,14 +7,20 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiParam,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { JwtAuthGuard, RolesGuard } from '../auth/guards';
+import { Roles } from '../auth/roles.decorator';
 import { AdministrationService } from './administration.service';
 import { CreateAdministrationDto } from './dto/create-administration.dto';
 import { UpdateAdministrationDto } from './dto/update-administration.dto';
@@ -31,28 +38,35 @@ export class AdministrationController {
     return this.administrationService.create(createAdministrationDto);
   }
 
-  //#TODO: Need to be logged in
   @Get()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin' })
   findAll() {
     return this.administrationService.findAll();
   }
 
-  @Get(':id/:email')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  findOne(@Param('id') id?: string, @Param('email') email?: string) {
-    return this.administrationService.findOne(id, email);
+  @Get(':email')
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiOkResponse({ description: 'returns a admin by email' })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin' })
+  @ApiNotFoundResponse({ description: "Couldn't find this email" })
+  @ApiParam({ name: 'email', type: String })
+  findOne(@Param('email') email?: string) {
+    return this.administrationService.findOne(email);
   }
 
-  //#TODO: need to be logged in
   @Patch(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiOkResponse({ description: 'Updates a admin by id' })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin' })
+  @ApiNotFoundResponse({ description: "Couldn't find this id" })
   update(
     @Param('id') id: string,
     @Body() updateAdministrationDto: UpdateAdministrationDto,
@@ -60,11 +74,11 @@ export class AdministrationController {
     return this.administrationService.update(id, updateAdministrationDto);
   }
 
-  //#TODO: need to be logged in
   @Delete(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Deletes a admin by id' })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin' })
+  @ApiNotFoundResponse({ description: "Couldn't find this id" })
   remove(@Param('id') id: string) {
     return this.administrationService.remove(id);
   }

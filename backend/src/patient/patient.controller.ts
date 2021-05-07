@@ -7,24 +7,29 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiParam,
   ApiQuery,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '.prisma/client';
+import { GetUser } from '../auth/decorators/getUser';
+import { PatientPayload } from '../auth/strategy';
+import { JwtAuthGuard, RolesGuard } from '../auth/guards';
 
-@ApiTags('patient')
+@ApiTags('Patient')
 @Controller('patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
@@ -37,21 +42,25 @@ export class PatientController {
     return this.patientService.create(createPatientDto);
   }
 
-  @Roles(Role.ADMIN)
-  @ApiUnauthorizedResponse({ description: 'Need to be an Admin' })
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN, Role.DOCTOR)
+  @ApiBearerAuth()
+  @ApiUnauthorizedResponse({ description: 'Need authenticated' })
+  @ApiForbiddenResponse({ description: 'Need to be an admin or an Doctor' })
   @ApiOkResponse({ description: 'Returns all patients' })
   findAll() {
     return this.patientService.findAll();
   }
 
-  //#TODO:Need to be logged
   @Get('/info')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse({ description: 'Return one patient' })
   @ApiNotFoundResponse({ description: "Couldn't find one patient" })
   @ApiBadRequestResponse({
     description: 'You need to provide at least one query',
   })
+  @ApiBearerAuth()
   @ApiQuery({ name: 'email', required: false })
   @ApiQuery({ name: 'cpf', required: false })
   @ApiQuery({ name: 'id', required: false })
@@ -62,24 +71,37 @@ export class PatientController {
   ) {
     return this.patientService.findOne({ email, cpf, id });
   }
-  //#TODO: Need to be logged
-  @Patch(':id')
+
+  @Get('/profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'Return patient profile' })
+  @ApiUnauthorizedResponse({ description: 'Need authenticated' })
+  profile(@GetUser() { userId }: PatientPayload) {
+    return this.patientService.findOne({ id: userId });
+  }
+
+  @Patch()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'Updated a Patient' })
-  @ApiNotFoundResponse({ description: "Couldn't find this patient" })
   @ApiBadRequestResponse({ description: 'Invalid Body' })
-  @ApiParam({ name: 'id', type: String })
+  @ApiUnauthorizedResponse({ description: 'Need authenticated' })
   update(
-    @Param('id')
-    id: string,
+    @GetUser() user: PatientPayload,
     @Body() updatePatientDto: UpdatePatientDto,
   ) {
-    return this.patientService.update(id, updatePatientDto);
+    return this.patientService.update(user, updatePatientDto);
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'Deleted Patient with success' })
+  @ApiUnauthorizedResponse({ description: 'Need authenticated' })
   @ApiNotFoundResponse({ description: "Couldn't find this patient" })
+  @ApiForbiddenResponse({ description: 'Need to be an admin' })
   @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   remove(@Param('id') id: string) {
     return this.patientService.remove(id);
   }

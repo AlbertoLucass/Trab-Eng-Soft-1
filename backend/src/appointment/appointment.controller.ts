@@ -8,16 +8,20 @@ import {
   Delete,
   Query,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiParam,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
+import { JwtAuthGuard, RolesGuard } from '../auth/guards';
 import { Roles } from '../auth/roles.decorator';
 import { PrismaValidationError } from '../util/PrismaFilter';
 import { AppointmentService } from './appointment.service';
@@ -41,17 +45,14 @@ export class AppointmentController {
   }
 
   @Get()
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Returns all appointments or filters' })
   findAll(@Query() filterAppointmentDto: FilterAppointmentDto) {
     return this.appointmentService.findAll(filterAppointmentDto);
   }
 
   @Get(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Find one by id' })
+  @ApiNotFoundResponse({ description: "Couldn't find the appointment" })
   @ApiParam({ name: 'patientId', type: String })
   @ApiParam({ name: 'doctorId', type: String })
   @ApiParam({ name: 'date', type: String })
@@ -59,9 +60,9 @@ export class AppointmentController {
     return this.appointmentService.findOne(findOneAppointmentDto);
   }
   @Patch(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Updates a appointment' })
+  @ApiNotFoundResponse({ description: "Couldn't find the appointment" })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
   update(
     @Param() findOneAppointmentDto: FindOneAppointmentDto,
     @Body() updateAppointmentDto: UpdateAppointmentDto,
@@ -73,11 +74,24 @@ export class AppointmentController {
   }
 
   @Delete(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Deletes a appointment' })
+  @ApiNotFoundResponse({ description: "Couldn't find the appointment" })
+  @ApiUnauthorizedResponse({ description: 'You needed to be logged' })
+  @ApiForbiddenResponse({ description: 'You need to be a doctor or a admin' })
   @Roles(Role.ADMIN, Role.DOCTOR)
   remove(@Param() findOneAppointmentDto: FindOneAppointmentDto) {
     return this.appointmentService.remove(findOneAppointmentDto);
+  }
+
+  @Get('/date/:date')
+  async getByDate(@Param('date') date: string) {
+    return await this.appointmentService.getByDate(date);
+  }
+
+  @Post('/finished')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN, Role.DOCTOR)
+  async finished(@Body() filterAppointmentDto: Required<FilterAppointmentDto>) {
+    return await this.appointmentService.setHappened(filterAppointmentDto);
   }
 }

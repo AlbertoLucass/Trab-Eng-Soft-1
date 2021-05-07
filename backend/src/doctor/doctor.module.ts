@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { DoctorController } from './doctor.controller';
 import { PrismaModule } from '../prisma/prisma.module';
-import { RolesGuard } from '../auth/roles.guard';
 
 @Module({
   imports: [PrismaModule],
   controllers: [DoctorController],
-  providers: [DoctorService, RolesGuard],
+  providers: [DoctorService],
   exports: [DoctorService],
 })
 export class DoctorModule {}

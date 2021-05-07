@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AdministrationService } from '../administration/administration.service';
-import { DoctorService } from '../doctor/doctor.service';
-import { PatientService } from '../patient/patient.service';
+import { AdministrationModule } from '../administration/administration.module';
+import { DoctorModule } from '../doctor/doctor.module';
+import { PatientModule } from '../patient/patient.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { jwtConstants } from './auth.constraint';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
-import { LocalStrategy } from './local.strategy';
-import { RolesGuard } from './roles.guard';
+import { JwtStrategy } from './strategy/jwt.strategy';
+import { AdminStrategy, DoctorStrategy, PatientStrategy } from './strategy/';
+import { RolesGuard } from './guards';
 
 @Module({
   imports: [
@@ -19,10 +19,18 @@ import { RolesGuard } from './roles.guard';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '15m' },
     }),
-    DoctorService,
-    AdministrationService,
-    PatientService,
+    PatientModule,
+    DoctorModule,
+    AdministrationModule,
   ],
-  providers: [AuthService, JwtStrategy, LocalStrategy, RolesGuard],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    AdminStrategy,
+    PatientStrategy,
+    DoctorStrategy,
+    RolesGuard,
+  ],
+  exports: [AuthService],
 })
 export class AuthModule {}

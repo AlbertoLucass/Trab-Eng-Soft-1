@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('Cline')
     .setDescription('Clinic management system')
     .setVersion('1.0')
-    .addTag('api')
     .build();
   app.useGlobalPipes(new ValidationPipe());
   const document = SwaggerModule.createDocument(app, config);

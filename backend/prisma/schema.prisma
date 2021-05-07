@@ -46,6 +46,7 @@ model Appointment {
   updatedAt DateTime @updatedAt
   Clinic    Clinic?  @relation(fields: [clinicId], references: [id])
   clinicId  String?
+  happened  Boolean  @default(false)
 
   @@id([patientId, doctorId, Date])
 }
@@ -53,7 +54,7 @@ model Appointment {
 model Doctor {
   id          String        @id @default(uuid())
   name        String
-  crm         BigInt        @unique
+  crm         Int           @unique
   cpf         String        @unique
   rg          String        @unique
   phone       String        @unique

@@ -7,7 +7,8 @@ import { AdministrationModule } from './administration/administration.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DoctorModule } from './doctor/doctor.module';
-import { RolesGuard } from './auth/roles.guard';
+import { RolesGuard } from './auth/guards';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { RolesGuard } from './auth/roles.guard';
     AdministrationModule,
     AppointmentModule,
     DoctorModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: 'APP_GUARD', useClass: RolesGuard }],
+  providers: [AppService],
 })
 export class AppModule {}

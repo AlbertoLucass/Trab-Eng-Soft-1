@@ -10,6 +10,49 @@ import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 @Injectable()
 export class AppointmentService {
   constructor(private readonly prisma: PrismaService) {}
+
+  getByDate(date: string) {
+    const formattedDate = toFormat(date);
+    return this.prisma.appointment.findMany({
+      where: { Date: formattedDate, AND: { happened: false } },
+      select: {
+        Clinic: {
+          select: { name: true, phone: true },
+        },
+        Doctor: {
+          select: {
+            name: true,
+            email: true,
+            phone: true,
+            crm: true,
+          },
+        },
+        Patient: {
+          select: {
+            email: true,
+            phone: true,
+            name: true,
+          },
+        },
+        Date: true,
+      },
+    });
+  }
+
+  setHappened({ date, doctorId, patientId }: Required<FilterAppointmentDto>) {
+    const formattedDate = toFormat(date);
+    return this.prisma.appointment.update({
+      data: { happened: true },
+      where: {
+        patientId_doctorId_Date: {
+          Date: formattedDate,
+          doctorId,
+          patientId,
+        },
+      },
+    });
+  }
+
   create(createAppointmentDto: CreateAppointmentDto) {
     const { clinicId, date, doctorId, patientId } = createAppointmentDto;
 

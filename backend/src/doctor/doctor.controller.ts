@@ -7,18 +7,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { JwtAuthGuard, RolesGuard } from '../auth/guards';
 import { Roles } from '../auth/roles.decorator';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
-import { FindOneDoctorDto } from './dto/find-one-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
 @ApiTags('Doctor')
@@ -35,41 +38,45 @@ export class DoctorController {
   }
 
   @Get()
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  // @Roles(Role.ADMIN)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiOkResponse({ description: 'Returns info of all doctors' })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin' })
   findAll() {
     return this.doctorService.findAll();
   }
 
-  //#TODO: need to be logged in
-  @Roles(Role.ADMIN, Role.DOCTOR)
   @Get(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  findOne(@Param() findOneDoctorDto: FindOneDoctorDto) {
-    return this.doctorService.findOne(findOneDoctorDto);
+  @Roles(Role.ADMIN, Role.DOCTOR)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiOkResponse({ description: 'Return doctor info' })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin or an doctor' })
+  @ApiNotFoundResponse({ description: 'Doctor not found' })
+  findOne(@Param(':id') id: string) {
+    return this.doctorService.findOne({ id });
   }
 
-  //#TODO: need to be logged in
   @Patch(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  update(
-    @Param() findOneDoctorDto: FindOneDoctorDto,
-    @Body() updateDoctorDto: UpdateDoctorDto,
-  ) {
-    return this.doctorService.update(findOneDoctorDto, updateDoctorDto);
+  @Roles(Role.ADMIN, Role.DOCTOR)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiOkResponse({ description: 'Updates doctor info' })
+  @ApiNotFoundResponse({ description: "Couldn't find this doctor" })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin or an doctor' })
+  @ApiBadRequestResponse({ description: 'Invalid body' })
+  update(@Param('id') id: string, @Body() updateDoctorDto: UpdateDoctorDto) {
+    return this.doctorService.update({ id }, updateDoctorDto);
   }
 
-  //#TODO: need to be an admin
   @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
+  @ApiOkResponse({ description: 'Deletes a doctor' })
+  @ApiNotFoundResponse({ description: "Couldn't find this doctor" })
+  @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
+  @ApiForbiddenResponse({ description: 'You need to be an admin or an doctor' })
   remove(@Param('id') id: string) {
     return this.doctorService.remove(id);
   }
