@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+    rel="stylesheet">
+ 
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/partials/header.css">
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/partials/forms.css">
+  <link rel="stylesheet" type="text/css" href="../../../public/styles/partials/show-docs.css">
+
+
+  <title>Cline</title>
+</head>
+
+<body id="show-docs">
+
+  <div id="container">
+    <header class="page-header">
+
+      <div class="top-bar-container">
+        <a href="../../menu/menu.html">
+          <img src="../../../public/images/icons/back.svg" alt="Voltar">
+        </a>
+        <a href="../../index.html">
+          <!-- voltar para o index-->
+          Sair
+        </a> 
+      </div>
+
+      <div class="header-content">
+        <strong>Essas são as consultas disponíveis.</strong>
+        <form id="search-docs" method="POST" >
+
+          <div class="input-block">
+            <label for="paciente">Nome do Paciente</label>
+            <input name="paciente" id="paciente" type="text" value="">
+          </div>
+
+          <div class="input-block">
+            <label for="medico">Nome do Médico</label>
+            <input name="medico" id="medico" type="text" value="">
+          </div>
+
+          <button type="submit" form="search-docs">Buscar</button>
+
+        </form>
+      </div>
+
+    </header>
+
+    <main>
+        <article class="med-item">   
+          <header>
+            <div>
+              <strong>Nome Paciente: Alberto</strong>
+              <span>Nome Medico: Alberto</span><br>
+              <p>Data da Consulta: 03/05/2021</p>
+              <p>Hora: 20:20</p>
+              <p>Status: Pendente</p>
+            </div>
+          </header>
+
+          <footer>
+            <button class="edit" type="submit">Editar</button>
+            <button class="delete" type="submit" onclick="excluir()">Excluir</button>
+            
+            <!-- substituir valores para dinamicos-->
+            <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{ whatsapp }} &text=Olá Sr.(a), A sua consulta precisará ser remarcada." class="button" target="_blank">
+              <img src="../../../public/images/icons/whatsapp.svg" alt="WhatsApp">
+              Entrar em contato
+            </a>
+          </footer>
+
+        </article>
+
+    </main>
+  </div>
+  <script type="text/javascript" src="../../../scripts/eventsButtons.js"></script>
+</body>
+
+</html>
