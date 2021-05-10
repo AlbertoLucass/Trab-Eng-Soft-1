@@ -1,5 +1,4 @@
-import { parse } from 'date-fns';
-
-const toFormat = (date: string): Date => parse(date, 'yyyy-MM-dd', Date.now());
+import { parseISO } from 'date-fns';
+const toFormat = (date: string): Date => parseISO(date);
 
 export { toFormat };

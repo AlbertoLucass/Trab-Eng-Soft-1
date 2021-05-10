@@ -2,11 +2,7 @@ import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
-import {
-  AdminAuthGuard,
-  DoctorAuthGuard,
-  PatientAuthGuard,
-} from './auth/guards';
+import { AdminAuthGuard } from './auth/guards';
 
 @ApiTags('Api')
 @Controller()
@@ -22,20 +18,8 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @UseGuards(PatientAuthGuard)
-  @Post('auth/login/patient')
-  async patientLogin(@Request() req) {
-    return this.authService.login(req.user);
-  }
-
-  @UseGuards(DoctorAuthGuard)
-  @Post('auth/login/doctor')
-  async doctorLogin(@Request() req) {
-    return this.authService.login(req.user);
-  }
-
   @UseGuards(AdminAuthGuard)
-  @Post('auth/login/admin')
+  @Post('auth/login')
   async adminLogin(@Request() req) {
     return this.authService.login(req.user);
   }

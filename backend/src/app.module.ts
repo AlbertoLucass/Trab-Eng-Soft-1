@@ -7,7 +7,6 @@ import { AdministrationModule } from './administration/administration.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DoctorModule } from './doctor/doctor.module';
-import { RolesGuard } from './auth/guards';
 import { AuthModule } from './auth/auth.module';
 
 @Module({

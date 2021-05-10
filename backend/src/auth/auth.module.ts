@@ -8,7 +8,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { jwtConstants } from './auth.constraint';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
-import { AdminStrategy, DoctorStrategy, PatientStrategy } from './strategy/';
+import { AdminStrategy } from './strategy/';
 import { RolesGuard } from './guards';
 
 @Module({
@@ -17,20 +17,13 @@ import { RolesGuard } from './guards';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '15m' },
+      signOptions: { expiresIn: '1d' },
     }),
     PatientModule,
     DoctorModule,
     AdministrationModule,
   ],
-  providers: [
-    AuthService,
-    JwtStrategy,
-    AdminStrategy,
-    PatientStrategy,
-    DoctorStrategy,
-    RolesGuard,
-  ],
+  providers: [AuthService, JwtStrategy, AdminStrategy, RolesGuard],
   exports: [AuthService],
 })
 export class AuthModule {}

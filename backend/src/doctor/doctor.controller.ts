@@ -38,8 +38,8 @@ export class DoctorController {
   }
 
   @Get()
-  // @Roles(Role.ADMIN)
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse({ description: 'Returns info of all doctors' })
   @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
   @ApiForbiddenResponse({ description: 'You need to be an admin' })
@@ -48,7 +48,7 @@ export class DoctorController {
   }
 
   @Get(':id')
-  @Roles(Role.ADMIN, Role.DOCTOR)
+  @Roles(Role.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse({ description: 'Return doctor info' })
   @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
@@ -59,7 +59,7 @@ export class DoctorController {
   }
 
   @Patch(':id')
-  @Roles(Role.ADMIN, Role.DOCTOR)
+  @Roles(Role.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse({ description: 'Updates doctor info' })
   @ApiNotFoundResponse({ description: "Couldn't find this doctor" })

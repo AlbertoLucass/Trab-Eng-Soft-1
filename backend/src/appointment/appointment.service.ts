@@ -6,7 +6,7 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { FindOneAppointmentDto } from './dto/find-one-appointment.dto';
 import { FilterAppointmentDto } from './dto/filter-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
-
+import { addDays } from 'date-fns';
 @Injectable()
 export class AppointmentService {
   constructor(private readonly prisma: PrismaService) {}
@@ -14,7 +14,10 @@ export class AppointmentService {
   getByDate(date: string) {
     const formattedDate = toFormat(date);
     return this.prisma.appointment.findMany({
-      where: { Date: formattedDate, AND: { happened: false } },
+      where: {
+        Date: { gte: formattedDate, lt: addDays(formattedDate, 1) },
+        AND: { happened: false },
+      },
       select: {
         Clinic: {
           select: { name: true, phone: true },
@@ -29,12 +32,14 @@ export class AppointmentService {
         },
         Patient: {
           select: {
-            email: true,
-            phone: true,
             name: true,
           },
         },
         Date: true,
+        happened: true,
+      },
+      orderBy: {
+        Date: 'asc',
       },
     });
   }

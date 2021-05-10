@@ -25,8 +25,6 @@ import {
 } from '@nestjs/swagger';
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '.prisma/client';
-import { GetUser } from '../auth/decorators/getUser';
-import { PatientPayload } from '../auth/strategy';
 import { JwtAuthGuard, RolesGuard } from '../auth/guards';
 
 @ApiTags('Patient')
@@ -44,7 +42,7 @@ export class PatientController {
 
   @Get()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.ADMIN, Role.DOCTOR)
+  @Roles(Role.ADMIN)
   @ApiBearerAuth()
   @ApiUnauthorizedResponse({ description: 'Need authenticated' })
   @ApiForbiddenResponse({ description: 'Need to be an admin or an Doctor' })
@@ -72,26 +70,14 @@ export class PatientController {
     return this.patientService.findOne({ email, cpf, id });
   }
 
-  @Get('/profile')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @ApiBearerAuth()
-  @ApiOkResponse({ description: 'Return patient profile' })
-  @ApiUnauthorizedResponse({ description: 'Need authenticated' })
-  profile(@GetUser() { userId }: PatientPayload) {
-    return this.patientService.findOne({ id: userId });
-  }
-
-  @Patch()
+  @Patch(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'Updated a Patient' })
   @ApiBadRequestResponse({ description: 'Invalid Body' })
   @ApiUnauthorizedResponse({ description: 'Need authenticated' })
-  update(
-    @GetUser() user: PatientPayload,
-    @Body() updatePatientDto: UpdatePatientDto,
-  ) {
-    return this.patientService.update(user, updatePatientDto);
+  update(@Param() id: string, @Body() updatePatientDto: UpdatePatientDto) {
+    return this.patientService.update(id, updatePatientDto);
   }
 
   @Delete(':id')

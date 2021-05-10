@@ -4,7 +4,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { PatientPayload } from '../auth/strategy';
 import { PrismaService } from '../prisma/prisma.service';
 import { toFormat, toHash } from '../util';
 import { CreatePatientDto } from './dto/create-patient.dto';
@@ -71,7 +70,7 @@ export class PatientService {
   }
 
   async update(
-    user: PatientPayload,
+    id: string,
     updatePatientDto: UpdatePatientDto,
   ): Promise<Patient> {
     if (updatePatientDto.password) {
@@ -79,7 +78,7 @@ export class PatientService {
     }
     return this.prisma.patient.update({
       data: updatePatientDto,
-      where: { id: user.userId },
+      where: { id: id },
     });
   }
 

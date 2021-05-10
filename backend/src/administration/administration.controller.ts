@@ -26,7 +26,7 @@ import { CreateAdministrationDto } from './dto/create-administration.dto';
 import { UpdateAdministrationDto } from './dto/update-administration.dto';
 
 @ApiTags('Admin')
-@Controller('administration')
+@Controller('admin')
 export class AdministrationController {
   constructor(private readonly administrationService: AdministrationService) {}
 
