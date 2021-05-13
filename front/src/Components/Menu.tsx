@@ -14,7 +14,7 @@ export const Menu = ({ open, toggleMenu }: IMenu) => {
             'Cadastrar Médico',
             'Cadastrar Paciente',
             'Cadastrar Apontamento',
-          ].map((text, index) => (
+          ].map((text) => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>
