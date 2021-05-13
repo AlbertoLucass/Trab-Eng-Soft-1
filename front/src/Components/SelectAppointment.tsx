@@ -47,7 +47,6 @@ export const SelectAppointment = () => {
           color="secondary"
           value={date}
           onChange={(event) => setDate(event.target.value)}
-          defaultValue={date}
           InputLabelProps={{
             shrink: true,
           }}

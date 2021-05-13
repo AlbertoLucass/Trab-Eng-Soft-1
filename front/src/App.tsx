@@ -1,43 +1,26 @@
-import {
-  Container,
-  CssBaseline,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { SelectAppointment } from './Components/SelectAppointment';
 import { Theming } from './Theme';
-
-const useStyles = makeStyles({
-  title: {},
-  container: {
-    textAlign: 'center',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-});
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Home } from './Pages/home';
+import { Admin } from './Pages/admin';
+import { PrivateRoute } from './util/auth';
+import { Start } from './Pages/admin/start';
 
 function App() {
-  const { container } = useStyles();
-
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
       <Theming>
         <CssBaseline>
-          <Container maxWidth="lg">
-            <div className={container}>
-              <div>
-                <Typography variant="h1">Cline</Typography>
-                <Typography variant="h4">Você economizando tempo!</Typography>
-              </div>
-              <SelectAppointment />
-            </div>
-          </Container>
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/admin" exact component={Admin} />
+              <PrivateRoute path="/admin/start" exact component={Start} />
+            </Switch>
+          </Router>
         </CssBaseline>
       </Theming>
     </QueryClientProvider>
