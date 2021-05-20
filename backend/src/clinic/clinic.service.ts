@@ -7,7 +7,7 @@ import { UpdateClinicDto } from './dto/update-clinic.dto';
 export interface PartialClinic {
   name: string;
   phone: string;
-  id: string;
+  id: number;
 }
 @Injectable()
 export class ClinicService {
@@ -27,7 +27,7 @@ export class ClinicService {
     });
   }
 
-  async findOne(id: string): Promise<Clinic> {
+  async findOne(id: number): Promise<Clinic> {
     const clinic = await this.prisma.clinic.findUnique({ where: { id } });
     if (!clinic) {
       throw new NotFoundException();
@@ -35,17 +35,17 @@ export class ClinicService {
     return clinic;
   }
 
-  update(id: string, updateClinicDto: UpdateClinicDto): Promise<Clinic> {
+  update(id: number, updateClinicDto: UpdateClinicDto): Promise<Clinic> {
     return this.prisma.clinic.update({ data: updateClinicDto, where: { id } });
   }
 
-  remove(id: string): Promise<Clinic> {
+  remove(id: number): Promise<Clinic> {
     return this.prisma.clinic.update({
       data: { active: false },
       where: { id },
     });
   }
-  reactivate(id: string): Promise<Clinic> {
+  reactivate(id: number): Promise<Clinic> {
     return this.prisma.clinic.update({
       data: { active: true },
       where: { id },

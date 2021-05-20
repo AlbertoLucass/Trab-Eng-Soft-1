@@ -1,4 +1,5 @@
 import { Drawer, List, ListItem, ListItemText } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 interface IMenu {
   open: boolean;
@@ -11,13 +12,22 @@ export const Menu = ({ open, toggleMenu }: IMenu) => {
       <Drawer anchor="left" open={open} onClose={() => toggleMenu(!open)}>
         <List style={{ width: 250 }}>
           {[
-            'Cadastrar Médico',
-            'Cadastrar Paciente',
-            'Cadastrar Apontamento',
-          ].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
+            { name: 'Cadastrar Médico', route: '/admin/create/doctor' },
+            { name: 'Cadastrar Paciente', route: '/admin/create/patient' },
+            {
+              name: 'Cadastrar Apontamento',
+              route: '/admin/create/appointment',
+            },
+          ].map(({ name, route }) => (
+            <Link
+              key={name}
+              style={{ textDecoration: 'none', color: '#234469' }}
+              to={route}
+            >
+              <ListItem button>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>

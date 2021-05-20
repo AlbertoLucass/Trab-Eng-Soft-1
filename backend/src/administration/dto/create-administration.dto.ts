@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsString, IsEmail } from 'class-validator';
+import { IsInt, IsString, IsEmail } from 'class-validator';
 
 export class CreateAdministrationDto {
   @ApiProperty()
-  @IsUUID()
-  clinicId: string;
+  @IsInt()
+  clinicId: number;
   @IsString()
   @ApiProperty()
   @IsEmail()

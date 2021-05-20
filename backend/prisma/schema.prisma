@@ -18,12 +18,11 @@ model Patient {
   Address     Address?
   cpf         String        @unique
   phone       String
-  password    String
   createdAt   DateTime      @default(now())
   birthday    DateTime
   updatedAt   DateTime      @updatedAt
   Clinic      Clinic?       @relation(fields: [clinicId], references: [id])
-  clinicId    String?
+  clinicId    Int?
   role        Role          @default(PATIENT)
 }
 
@@ -31,6 +30,7 @@ model Address {
   Patient   Patient @relation(fields: [patientId], references: [id])
   patientId String  @id
   road      String
+  city      String
   cep       String
   state     String
   number    Int
@@ -45,7 +45,7 @@ model Appointment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Clinic    Clinic?  @relation(fields: [clinicId], references: [id])
-  clinicId  String?
+  clinicId  Int?
   happened  Boolean  @default(false)
 
   @@id([patientId, doctorId, Date])
@@ -61,9 +61,8 @@ model Doctor {
   birthday    DateTime
   Appointment Appointment[]
   Clinic      Clinic?       @relation(fields: [clinicId], references: [id])
-  clinicId    String?
+  clinicId    Int?
   email       String        @unique
-  password    String
   active      Boolean       @default(true)
   role        Role          @default(DOCTOR)
 }
@@ -71,7 +70,7 @@ model Doctor {
 model Adminstration {
   id       String @id @default(uuid())
   Clinic   Clinic @relation(fields: [clinicId], references: [id])
-  clinicId String
+  clinicId Int
   email    String @unique
   password String
   name     String
@@ -80,7 +79,7 @@ model Adminstration {
 }
 
 model Clinic {
-  id            String          @id @default(uuid())
+  id            Int             @id @default(autoincrement())
   name          String
   phone         String
   createdAt     DateTime        @default(now())

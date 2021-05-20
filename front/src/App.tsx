@@ -6,6 +6,11 @@ import { Home } from './Pages/home';
 import { Admin } from './Pages/admin';
 import { PrivateRoute } from './util/auth';
 import { Start } from './Pages/admin/start';
+import { Add } from './Pages/admin/Add';
+import { TypeForm } from './util/typeForm.enum';
+import { DocForm } from './Components/Forms/DocForm';
+import { PatientForm } from './Components/Forms/PartientForm';
+import { AppointmentForm } from './Components/Forms/AppointmentForm';
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +24,27 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/admin" exact component={Admin} />
               <PrivateRoute path="/admin/start" exact component={Start} />
+              <PrivateRoute
+                path="/admin/create/doctor"
+                exact
+                component={() => (
+                  <Add type={TypeForm.Doctor} form={<DocForm />} />
+                )}
+              />
+              <PrivateRoute
+                path="/admin/create/patient"
+                exact
+                component={() => (
+                  <Add type={TypeForm.Patient} form={<PatientForm />} />
+                )}
+              />
+              <PrivateRoute
+                path="/admin/create/appointment"
+                exact
+                component={() => (
+                  <Add type={TypeForm.Appointment} form={<AppointmentForm />} />
+                )}
+              />
             </Switch>
           </Router>
         </CssBaseline>

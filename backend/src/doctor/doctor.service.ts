@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
-import { toHash, toFormat } from '../util';
+import { toFormat } from '../util';
 import { Doctor } from '.prisma/client';
 import { FindOneDoctorDto } from './dto/find-one-doctor.dto';
 
@@ -17,12 +17,10 @@ export class DoctorService {
       cpf,
       crm,
       email,
-      password,
       phone,
       rg,
     } = createDoctorDto;
 
-    const hashedPassword = await toHash(password);
     const formattedBirthday = toFormat(birthday);
 
     return this.prisma.doctor.create({
@@ -33,7 +31,6 @@ export class DoctorService {
         cpf,
         crm,
         email,
-        password: hashedPassword,
         phone,
         rg,
       },
@@ -52,9 +49,6 @@ export class DoctorService {
     findOneDoctorDto: FindOneDoctorDto,
     updateDoctorDto: UpdateDoctorDto,
   ) {
-    if (updateDoctorDto.password) {
-      updateDoctorDto.password = await toHash(updateDoctorDto.password);
-    }
     return this.prisma.doctor.update({
       data: updateDoctorDto,
       where: findOneDoctorDto,

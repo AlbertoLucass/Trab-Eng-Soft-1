@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -40,7 +41,7 @@ export class ClinicController {
   @ApiOkResponse({ description: 'Return the clinic that has the id' })
   @ApiNotFoundResponse({ description: "Couldn't find clinic with the id" })
   @ApiBadRequestResponse({ description: "Didn't pass the id" })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.clinicService.findOne(id);
   }
 
@@ -48,21 +49,24 @@ export class ClinicController {
   @ApiOkResponse({ description: 'Patch with success' })
   @ApiNotFoundResponse({ description: "Didn't find the clinic with the id" })
   @ApiBadRequestResponse({ description: 'Invalid body' })
-  update(@Param('id') id: string, @Body() updateClinicDto: UpdateClinicDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateClinicDto: UpdateClinicDto,
+  ) {
     return this.clinicService.update(id, updateClinicDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ description: 'Deleted clinic with success' })
   @ApiNotFoundResponse({ description: "Couldn't find clinic" })
-  deactivate(@Param('id') id: string) {
+  deactivate(@Param('id', ParseIntPipe) id: number) {
     return this.clinicService.remove(id);
   }
 
   @Post('/reactivate/:id')
   @ApiOkResponse({ description: 'Reactivated clinic with success' })
   @ApiNotFoundResponse({ description: "Couldn't find clinic" })
-  reactivate(@Param('id') id: string) {
+  reactivate(@Param('id', ParseIntPipe) id: number) {
     return this.clinicService.reactivate(id);
   }
 }

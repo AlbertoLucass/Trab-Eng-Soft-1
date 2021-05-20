@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AdministrationModule } from '../administration/administration.module';
-import { DoctorModule } from '../doctor/doctor.module';
-import { PatientModule } from '../patient/patient.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { jwtConstants } from './auth.constraint';
 import { AuthService } from './auth.service';
@@ -19,8 +17,7 @@ import { RolesGuard } from './guards';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1d' },
     }),
-    PatientModule,
-    DoctorModule,
+
     AdministrationModule,
   ],
   providers: [AuthService, JwtStrategy, AdminStrategy, RolesGuard],

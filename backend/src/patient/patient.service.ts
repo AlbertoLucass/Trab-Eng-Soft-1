@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { toFormat, toHash } from '../util';
+import { toFormat } from '../util';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { FindPatientDto } from './dto/find-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
@@ -17,7 +17,6 @@ export class PatientService {
     const {
       email,
       phone,
-      password,
       name,
       cpf,
       clinicId,
@@ -25,7 +24,6 @@ export class PatientService {
       birthday,
     } = createPatientDto;
     const formattedBirthDay = toFormat(birthday);
-    const hash = await toHash(password);
     const clinic = await this.prisma.clinic.findUnique({
       where: { id: clinicId },
     });
@@ -45,7 +43,6 @@ export class PatientService {
         name,
         phone,
         clinicId,
-        password: hash,
       },
     });
   }
@@ -73,9 +70,6 @@ export class PatientService {
     id: string,
     updatePatientDto: UpdatePatientDto,
   ): Promise<Patient> {
-    if (updatePatientDto.password) {
-      updatePatientDto.password = await toHash(updatePatientDto.password);
-    }
     return this.prisma.patient.update({
       data: updatePatientDto,
       where: { id: id },

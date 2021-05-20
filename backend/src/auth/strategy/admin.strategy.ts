@@ -6,7 +6,7 @@ import { Role } from '.prisma/client';
 
 export interface Admin {
   id: string;
-  clinicId: string;
+  clinicId: number;
   email: string;
   name: string;
   cpf: string;
