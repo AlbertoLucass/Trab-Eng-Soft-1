@@ -11,6 +11,7 @@ import { TypeForm } from './util/typeForm.enum';
 import { DocForm } from './Components/Forms/DocForm';
 import { PatientForm } from './Components/Forms/PartientForm';
 import { AppointmentForm } from './Components/Forms/AppointmentForm';
+import { ShowDocs } from './Pages/admin/list/show-docs';
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,8 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/admin" exact component={Admin} />
               <PrivateRoute path="/admin/start" exact component={Start} />
+              <PrivateRoute path="/admin/start/docs" exact component={ShowDocs} />
+              
               <PrivateRoute
                 path="/admin/create/doctor"
                 exact
