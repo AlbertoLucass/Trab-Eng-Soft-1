@@ -1,4 +1,4 @@
-import {Container,makeStyles,Paper,Typography} from '@material-ui/core';
+import {Container,makeStyles,Paper,Typography, createStyles, Theme} from '@material-ui/core';
 import {AppTopBar} from '../../../Components/AppBar';
 import {TypeForm} from '../../../util/typeForm.enum';
 import { ReactNode} from 'react';
@@ -10,67 +10,74 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 import whatsapp from './whatsapp.svg';
 
 
 interface Column {
-  id: 'id'|'name' | 'CRM' | 'cpf' | 'telefone' | 'rg' | 'nClinica' | 'email';
+  id: 'id'|'name' | 'CRM' | 'cpf' | 'telefone' | 'rg' | 'nClinica' | 'email' | 'whatsapp';
   label: string;
   minWidth ? : number;
-  align ? : 'right';
+  align ? : 'center';
   format ? : (value: number) => string;
 }
 
 const columns: Column[] = [{
       id: 'id',
       label: 'Id',
-      minWidth: 125
+      minWidth: 118
   },
   {
     id: 'name',
       label: 'Nome',
-      minWidth: 125
+      minWidth: 118
   },
   {
       id: 'CRM',
-      label: '\u00a0CRM',
-      minWidth: 125
+      label: 'CRM',
+      minWidth: 118
   },
   {
       id: 'cpf',
-      label: 'CPF\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0',
-      minWidth: 125,
-      align: 'right',
+      label: 'CPF',
+      minWidth: 118,
+      align: 'center',
       format: (value: number) => value.toLocaleString('pt-BR'),
   },
   {
       id: 'rg',
-      label: 'RG\u00a0\u00a0\u00a0',
-      minWidth: 125,
-      align: 'right',
+      label: 'RG',
+      minWidth: 118,
+      align: 'center',
       format: (value: number) => value.toFixed(2),
   },
   {
     id: 'telefone',
-    label: '\u00a0\u00a0\u00a0\u00a0Telefone',
-    minWidth: 125,
-    align: 'right',
+    label: 'Telefone',
+    minWidth: 118,
+    align: 'center',
     format: (value: number) => value.toLocaleString('pt-BR'),
 },
 {
   id: 'nClinica',
   label: 'N° Clínica',
-  minWidth: 125,
-  align: 'right',
+  minWidth: 118,
+  align: 'center',
   format: (value: number) => value.toLocaleString('pt-BR'),
 },
 {
   id: 'email',
   label: 'Email',
-  minWidth: 125,
-  align: 'right',
+  minWidth: 118,
+  align: 'center',
   format: (value: number) => value.toLocaleString('pt-BR'),
+},
+{
+    id: 'whatsapp',
+    label: 'Whatsapp',
+    minWidth: 118,
+    align: 'center',
 },
 ];
 
@@ -83,18 +90,19 @@ interface Data {
   rg: string;
   nClinica: number;
   email: string;
+  whatsapp: string;
 }
 
-function createData(id: number, name: string, CRM: string, cpf: string, telefone: string, rg: string, nClinica: number, email: string): Data {
+function createData(id: number, name: string, CRM: string, cpf: string, telefone: string, rg: string, nClinica: number, email: string, whatsapp: string): Data {
 
-  return { id, name, CRM, cpf, telefone, rg, nClinica, email };
+  return { id, name, CRM, cpf, telefone, rg, nClinica, email , whatsapp};
 }
 
 const rows = [
-  createData(1,'Alberto', '111111','111111' , '111111', '111111',1, 'alberto@ufba.br'),
-  createData(2,'Gustavo', '222222','222222' , '222222', '222222',2, 'gustavo@ufba.br'),
-  createData(3,'Danilo', '333333','333333' , '333333', '333333',3, 'danilo@ufba.br'),
-  createData(4,'Pedro', '444444','444444' , '444444', '444444',4, 'pedro@ufba.br'),
+  createData(1,'Alberto', '111111','111111' , '111111', '111111',1, 'alberto@ufba.br', '111'),
+  createData(2,'Gustavo', '222222','222222' , '222222', '222222',2, 'gustavo@ufba.br', '111'),
+  createData(3,'Danilo', '333333','333333' , '333333', '333333',3, 'danilo@ufba.br', '111'),
+  createData(4,'Pedro', '444444','444444' , '444444', '444444',4, 'pedro@ufba.br', '111'),
   /*createData('China', 'CN', 1403500365, 9596961),
   createData('Italy', 'IT', 60483973, 301340),
   createData('United States', 'US', 327167434, 9833520),
@@ -108,7 +116,7 @@ const rows = [
   createData('United Kingdom', 'GB', 67545757, 242495),
   createData('Russia', 'RU', 146793744, 17098246),
   createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),*/
+  createData('Brazil', 'BR', 210147118, 8515767),*/
 ];
 
 const useStyles = makeStyles({
@@ -137,6 +145,7 @@ const useStyles = makeStyles({
   container2: {
       maxHeight: 440,
   },
+  
 });
 
 interface Props {
