@@ -12,6 +12,7 @@ import { DocForm } from './Components/Forms/DocForm';
 import { PatientForm } from './Components/Forms/PartientForm';
 import { AppointmentForm } from './Components/Forms/AppointmentForm';
 import { ShowDocs } from './Pages/admin/list/show-docs';
+import { ShowPats } from './Pages/admin/list/show-pat';
 
 function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function App() {
               <Route path="/admin" exact component={Admin} />
               <PrivateRoute path="/admin/start" exact component={Start} />
               <PrivateRoute path="/admin/start/docs" exact component={ShowDocs} />
+              <PrivateRoute path="/admin/start/pats" exact component={ShowPats} />
               
               <PrivateRoute
                 path="/admin/create/doctor"

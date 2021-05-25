@@ -16,7 +16,7 @@ import whatsapp from './whatsapp.svg';
 
 
 interface Column {
-  id: 'id'|'name' | 'CRM' | 'cpf' | 'telefone' | 'rg' | 'nClinica' | 'email' | 'whatsapp';
+  id: 'id'|'name' | 'cpf' | 'clinicId' | 'road' | 'cep' | 'number' | 'city' | 'state' | 'email' | 'birthday' |'phone'
   label: string;
   minWidth ? : number;
   align: 'center';
@@ -26,100 +26,102 @@ interface Column {
 const columns: Column[] = [{
       id: 'id',
       label: 'Id',
-      minWidth: 118,
-      align: 'center'
+      minWidth: 90,
+      align: 'center',
   },
   {
     id: 'name',
       label: 'Nome',
-      minWidth: 118,
-      align: 'center'
-  },
-  {
-      id: 'CRM',
-      label: 'CRM',
+      minWidth: 90,
       align: 'center',
-      minWidth: 118,
   },
   {
       id: 'cpf',
       label: 'CPF',
-      minWidth: 118,
+      minWidth: 90,
       align: 'center',
-      format: (value: number) => value.toLocaleString('pt-BR'),
   },
   {
-      id: 'rg',
-      label: 'RG',
-      minWidth: 118,
-      align: 'center',
-      format: (value: number) => value.toFixed(2),
-  },
-  {
-    id: 'telefone',
-    label: 'Telefone',
-    minWidth: 118,
+    id: 'clinicId',
+    label: 'N° Clínica',
+    minWidth: 90,
     align: 'center',
-    format: (value: number) => value.toLocaleString('pt-BR'),
+},
+  {
+      id: 'road',
+      label: 'Rua',
+      minWidth: 90,
+      align: 'center',
+  },
+  {
+    id: 'cep',
+    label: 'CEP',
+    minWidth: 90,
+    align: 'center',
 },
 {
-  id: 'nClinica',
-  label: 'N° Clínica',
-  minWidth: 118,
+  id: 'number',
+  label: 'N° Casa',
+  minWidth: 90,
   align: 'center',
-  format: (value: number) => value.toLocaleString('pt-BR'),
+},
+{
+  id: 'city',
+  label: 'N° Casa',
+  minWidth: 90,
+  align: 'center',
+},
+{
+  id: 'state',
+  label: 'Estado',
+  minWidth: 90,
+  align: 'center',
 },
 {
   id: 'email',
   label: 'Email',
-  minWidth: 118,
+  minWidth: 90,
   align: 'center',
-  format: (value: number) => value.toLocaleString('pt-BR'),
 },
 {
-    id: 'whatsapp',
-    label: 'Whatsapp',
-    minWidth: 118,
-    align: 'center',
+  id: 'birthday',
+  label: 'Nascimento',
+  minWidth: 90,
+  align: 'center',
+},
+{
+  id: 'phone',
+  label: 'Whatsapp',
+  minWidth: 90,
+  align: 'center',
 },
 ];
 
 interface Data {
-  id: number;
+  id: string;
   name: string;
-  CRM: string;
   cpf: string;
-  telefone: string;
-  rg: string;
-  nClinica: number;
+  clinicId: number;
+  road: string;
+  cep: string;
+  number: number;
+  city: string;
+  state: string;
   email: string;
-  whatsapp: string;
+  birthday: string;
+  phone: string;
 }
 
-function createData(id: number, name: string, CRM: string, cpf: string, telefone: string, rg: string, nClinica: number, email: string, whatsapp: string): Data {
+function createData(id: string, name: string, cpf: string, clinicId: number, road: string, cep: string, number: number, city: string, state: string, email: string, birthday: string, phone: string): Data {
 
-  return { id, name, CRM, cpf, telefone, rg, nClinica, email , whatsapp};
+  return { id, name, cpf, clinicId, road, cep, number , city, state, email, birthday, phone};
 }
 
 const rows = [
-  createData(1,'Alberto', '111111','111111' , '111111', '111111',1, 'alberto@ufba.br', '111'),
-  createData(2,'Gustavo', '222222','222222' , '222222', '222222',2, 'gustavo@ufba.br', '111'),
-  createData(3,'Danilo', '333333','333333' , '333333', '333333',3, 'danilo@ufba.br', '111'),
-  createData(4,'Pedro', '444444','444444' , '444444', '444444',4, 'pedro@ufba.br', '111'),
-  /*createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147118, 8515767),*/
+  createData('1', 'Alberto', '1111', 1, 'UFBA', '1515', 9 , 'Ibirataia', 'BA', 'alberto@ufba.br', '20/05/1900', '784512'),
+  createData('2', 'Gustavo', '2222', 1, 'UFBA', '1515', 9 , 'Camacari', 'BA', 'gustavo@ufba.br', '20/05/1900', '784512'),
+  createData('3', 'Pedro', '3333', 1, 'UFBA', '1515', 9 , 'Itabuna', 'BA', 'pedro@ufba.br', '20/05/1900', '784512'),
+  createData('4', 'Danilo', '4444', 1, 'UFBA', '1515', 9 , 'Salvador', 'BA', 'danilo@ufba.br', '20/05/1900', '784512'),
 ];
 
 const useStyles = makeStyles({
@@ -132,7 +134,7 @@ const useStyles = makeStyles({
       flexDirection: 'column',
   },
   paper: {
-      width: '95%',
+      width: '108%',
       padding: '2%',
       display: 'flex',
       flexDirection: 'column',
@@ -164,12 +166,12 @@ export interface Doc {
   cpf: number;
   rg: string
   telefone: string;
-  nClinica: string;
+  clinicIda: string;
   email: string;
 }
 
 
-export const ShowDocs = function () {
+export const ShowPats = function () {
       const {
           container,
           paper,
@@ -195,7 +197,7 @@ export const ShowDocs = function () {
     <Container className={container}>
       <Paper className={paper} elevation={3}>
         <main className={main}>
-          <Typography variant="h3">Esses são os Médicos disponíveis.</Typography>
+          <Typography variant="h3">Esses são os Pacientes disponíveis.</Typography>
           <article className="obj-item">
             <header>
               <div>
@@ -215,7 +217,7 @@ export const ShowDocs = function () {
                       <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                         return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.CRM}>
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.cpf}>
                           {columns.map((column) => {
                           const value = row[column.id];
                           return (
