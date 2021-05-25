@@ -98,7 +98,7 @@ const columns: Column[] = [{
 ];
 
 interface Data {
-  id: string;
+  id: number;
   name: string;
   cpf: string;
   clinicId: number;
@@ -112,16 +112,16 @@ interface Data {
   phone: string;
 }
 
-function createData(id: string, name: string, cpf: string, clinicId: number, road: string, cep: string, number: number, city: string, state: string, email: string, birthday: string, phone: string): Data {
+function createData(id: number, name: string, cpf: string, clinicId: number, road: string, cep: string, number: number, city: string, state: string, email: string, birthday: string, phone: string): Data {
 
   return { id, name, cpf, clinicId, road, cep, number , city, state, email, birthday, phone};
 }
 
 const rows = [
-  createData('1', 'Alberto', '1111', 1, 'UFBA', '1515', 9 , 'Ibirataia', 'BA', 'alberto@ufba.br', '20/05/1900', '784512'),
-  createData('2', 'Gustavo', '2222', 1, 'UFBA', '1515', 9 , 'Camacari', 'BA', 'gustavo@ufba.br', '20/05/1900', '784512'),
-  createData('3', 'Pedro', '3333', 1, 'UFBA', '1515', 9 , 'Itabuna', 'BA', 'pedro@ufba.br', '20/05/1900', '784512'),
-  createData('4', 'Danilo', '4444', 1, 'UFBA', '1515', 9 , 'Salvador', 'BA', 'danilo@ufba.br', '20/05/1900', '784512'),
+  createData(1, 'Alberto', '1111', 1, 'UFBA', '1515', 9 , 'Ibirataia', 'BA', 'alberto@ufba.br', '20/05/1900', '784512'),
+  createData(2, 'Gustavo', '2222', 1, 'UFBA', '1515', 9 , 'Camacari', 'BA', 'gustavo@ufba.br', '20/05/1900', '784512'),
+  createData(3, 'Pedro', '3333', 1, 'UFBA', '1515', 9 , 'Itabuna', 'BA', 'pedro@ufba.br', '20/05/1900', '784512'),
+  createData(4, 'Danilo', '4444', 1, 'UFBA', '1515', 9 , 'Salvador', 'BA', 'danilo@ufba.br', '20/05/1900', '784512'),
 ];
 
 const useStyles = makeStyles({

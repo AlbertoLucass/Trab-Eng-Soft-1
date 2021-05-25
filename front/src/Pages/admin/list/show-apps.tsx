@@ -16,7 +16,8 @@ import whatsapp from './whatsapp.svg';
 
 
 interface Column {
-  id: 'id'|'name' | 'crm' | 'cpf' | 'birthday' | 'rg' | 'clinicId' | 'email' | 'phone';
+
+  id: 'id'|'patientId' | 'doctorId' | 'clinicId' | 'date' ;
   label: string;
   minWidth ? : number;
   align: 'center';
@@ -24,102 +25,49 @@ interface Column {
 }
 
 const columns: Column[] = [{
-      id: 'id',
-      label: 'Id',
-      minWidth: 118,
-      align: 'center'
-  },
-  {
-    id: 'name',
-      label: 'Nome',
-      minWidth: 118,
-      align: 'center'
-  },
-  {
-      id: 'crm',
-      label: 'CRM',
-      align: 'center',
-      minWidth: 118,
-  },
-  {
-      id: 'cpf',
-      label: 'CPF',
-      minWidth: 118,
-      align: 'center',
-      format: (value: number) => value.toLocaleString('pt-BR'),
-  },
-  {
-      id: 'rg',
-      label: 'RG',
-      minWidth: 118,
-      align: 'center',
-      format: (value: number) => value.toFixed(2),
-  },
-  {
-    id: 'birthday',
-    label: 'Nascimento',
-    minWidth: 118,
+    id: 'id',
+    label: 'Id',
+    minWidth: 218,
+    align: 'center'
+},
+{
+  id: 'patientId',
+    label: 'Paciente',
+    minWidth: 218,
+    align: 'center'
+},
+{
+    id: 'doctorId',
+    label: 'Médico',
     align: 'center',
-    format: (value: number) => value.toLocaleString('pt-BR'),
+    minWidth: 218,
 },
 {
-  id: 'clinicId',
-  label: 'N° Clínica',
-  minWidth: 118,
-  align: 'center',
-  format: (value: number) => value.toLocaleString('pt-BR'),
-},
-{
-  id: 'email',
-  label: 'Email',
-  minWidth: 118,
-  align: 'center',
-  format: (value: number) => value.toLocaleString('pt-BR'),
-},
-{
-    id: 'phone',
-    label: 'Whatsapp',
-    minWidth: 118,
+    id: 'date',
+    label: 'Data',
+    minWidth: 218,
     align: 'center',
-},
+}
 ];
 
 interface Data {
   id: number;
-  name: string;
-  crm: number;
-  cpf: string;
-  rg: string
-  phone: string;
+  patientId: string;
+  doctorId: string;
   clinicId: number;
-  email: string;
-  birthday: string;
+  date: string;
 }
 
-function createData(id: number, name: string, crm: number, cpf: string, birthday: string, rg: string, clinicId: number, email: string, phone: string): Data {
+function createData(id: number, patientId: string, doctorId: string, clinicId: number, date: string): Data {
 
-  return { id, name, crm, cpf, birthday, rg, clinicId, email , phone};
+  return { id, patientId, doctorId, clinicId, date};
 }
 
 const rows = [
-  createData(1,'Alberto', 111111,'111111' , '111111', '111111',1, 'alberto@ufba.br', '111'),
-  createData(2,'Gustavo', 222222,'222222' , '222222', '222222',2, 'gustavo@ufba.br', '111'),
-  createData(3,'Danilo', 333333,'333333' , '333333', '333333',3, 'danilo@ufba.br', '111'),
-  createData(4,'Pedro', 444444,'444444' , '444444', '444444',4, 'pedro@ufba.br', '111'),
-  /*createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147118, 8515767),*/
+  createData(1,'Alberto', 'Alberto',1111 , '25/02/2021'),
+  createData(2,'Gustavo', 'Gustavo',2222 , '25/02/2021'),
+  createData(3,'Danilo', 'Danilo',3333 , '25/02/2021'),
+  createData(4,'Pedro', 'Pedro',4444 , '25/02/2021'),
 ];
 
 const useStyles = makeStyles({
@@ -132,7 +80,7 @@ const useStyles = makeStyles({
       flexDirection: 'column',
   },
   paper: {
-      width: '95%',
+      width: '75%',
       padding: '2%',
       display: 'flex',
       flexDirection: 'column',
@@ -157,7 +105,7 @@ interface Props {
 }
 
 
-export const ShowDocs = function () {
+export const ShowApps = function () {
       const {
           container,
           paper,
@@ -183,7 +131,7 @@ export const ShowDocs = function () {
     <Container className={container}>
       <Paper className={paper} elevation={3}>
         <main className={main}>
-          <Typography variant="h3">Esses são os Médicos disponíveis.</Typography>
+          <Typography variant="h3">Essas são as Consultas disponíveis.</Typography>
           <article className="obj-item">
             <header>
               <div>
@@ -203,7 +151,7 @@ export const ShowDocs = function () {
                       <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                         return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.crm}>
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.patientId}>
                           {columns.map((column) => {
                           const value = row[column.id];
                           return (

@@ -13,6 +13,7 @@ import { PatientForm } from './Components/Forms/PartientForm';
 import { AppointmentForm } from './Components/Forms/AppointmentForm';
 import { ShowDocs } from './Pages/admin/list/show-docs';
 import { ShowPats } from './Pages/admin/list/show-pat';
+import { ShowApps } from './Pages/admin/list/show-apps';
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
               <PrivateRoute path="/admin/start" exact component={Start} />
               <PrivateRoute path="/admin/start/docs" exact component={ShowDocs} />
               <PrivateRoute path="/admin/start/pats" exact component={ShowPats} />
+              <PrivateRoute path="/admin/start/apps" exact component={ShowApps} />
               
               <PrivateRoute
                 path="/admin/create/doctor"

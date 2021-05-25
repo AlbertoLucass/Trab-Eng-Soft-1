@@ -20,6 +20,7 @@ export const Menu = ({ open, toggleMenu }: IMenu) => {
             },
             { name: 'Listar Médicos', route: '/admin/start/docs' },
             { name: 'Listar Pacientes', route: '/admin/start/pats' },
+            { name: 'Listar Consultas', route: '/admin/start/apps' },
           ].map(({ name, route }) => (
             <Link
               key={name}
