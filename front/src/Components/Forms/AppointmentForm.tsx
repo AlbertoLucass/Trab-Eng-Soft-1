@@ -6,12 +6,16 @@ const useStyles = makeStyles({
   form: {
     display: 'flex',
     height: '70vh',
-    paddingTop: '10%',
+    paddingTop: '4%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'stretch',
     alignContent: 'space-around',
     flexWrap: 'nowrap',
+    marginBottom: '-17%',
+  },
+  textField: {
+    marginBottom: '1%',
   },
 });
 
@@ -25,7 +29,7 @@ interface Fields {
 export const AppointmentForm = () => {
   const { control, handleSubmit } = useForm<Fields>();
   const onSubmit = (data: Fields) => console.log(data);
-  const { form } = useStyles();
+  const { form, textField } = useStyles();
   return (
     <form className={form} noValidate onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -34,6 +38,7 @@ export const AppointmentForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="ID Paciente"
             {...field}
             fullWidth
@@ -48,6 +53,7 @@ export const AppointmentForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="ID Doutor"
             {...field}
             fullWidth
@@ -62,6 +68,7 @@ export const AppointmentForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="Número Clinica"
             {...field}
             fullWidth
@@ -78,6 +85,7 @@ export const AppointmentForm = () => {
             id="date"
             {...field}
             label="Data de Nascimento"
+            className={textField}
             autoFocus
             variant="outlined"
             type="date"

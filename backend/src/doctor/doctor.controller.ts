@@ -8,6 +8,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  UseFilters,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -20,11 +21,13 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard, RolesGuard } from '../auth/guards';
 import { Roles } from '../auth/roles.decorator';
+import { HttpExceptionFilter } from '../util/conflictFilter';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
 @ApiTags('Doctor')
+@UseFilters(HttpExceptionFilter)
 @Controller('doctor')
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
@@ -38,8 +41,6 @@ export class DoctorController {
   }
 
   @Get()
-  @Roles(Role.ADMIN)
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse({ description: 'Returns info of all doctors' })
   @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
   @ApiForbiddenResponse({ description: 'You need to be an admin' })

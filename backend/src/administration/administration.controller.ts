@@ -39,8 +39,6 @@ export class AdministrationController {
   }
 
   @Get()
-  @Roles(Role.ADMIN)
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOkResponse()
   @ApiUnauthorizedResponse({ description: 'You need to be logged in' })
   @ApiForbiddenResponse({ description: 'You need to be an admin' })

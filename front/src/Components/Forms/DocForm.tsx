@@ -2,18 +2,22 @@ import { makeStyles, TextField } from '@material-ui/core';
 import { FormFooter } from '../FormFooter';
 import { useForm, Controller } from 'react-hook-form';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   form: {
     display: 'flex',
     height: '70vh',
-    paddingTop: '2%',
+    paddingTop: '4%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'stretch',
     alignContent: 'space-around',
     flexWrap: 'nowrap',
+    marginBottom: '10%',
   },
-});
+  textField: {
+    marginBottom: '1%',
+  },
+}));
 
 interface Fields {
   name: string;
@@ -29,7 +33,7 @@ interface Fields {
 export const DocForm = () => {
   const { control, handleSubmit } = useForm<Fields>();
   const onSubmit = (data: Fields) => console.log(data);
-  const { form } = useStyles();
+  const { form, textField } = useStyles();
   return (
     <form className={form} noValidate onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -38,6 +42,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="Nome"
             {...field}
             fullWidth
@@ -52,6 +57,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="CRM"
             {...field}
             fullWidth
@@ -66,6 +72,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="CPF"
             {...field}
             fullWidth
@@ -80,6 +87,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="Telefone"
             {...field}
             fullWidth
@@ -94,6 +102,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="RG"
             {...field}
             fullWidth
@@ -108,6 +117,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="Número da Cliníca"
             type="number"
             {...field}
@@ -123,6 +133,7 @@ export const DocForm = () => {
         render={({ field }) => (
           <TextField
             variant="outlined"
+            className={textField}
             label="Email"
             type="email"
             {...field}
@@ -140,6 +151,7 @@ export const DocForm = () => {
             id="date"
             {...field}
             label="Data de Nascimento"
+            className={textField}
             autoFocus
             variant="outlined"
             type="date"

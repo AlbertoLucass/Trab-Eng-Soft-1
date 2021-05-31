@@ -18,6 +18,9 @@ export const Menu = ({ open, toggleMenu }: IMenu) => {
               name: 'Cadastrar Apontamento',
               route: '/admin/create/appointment',
             },
+            { name: 'Listar Médicos', route: '/admin/list/doctors' },
+            { name: 'Listar Pacientes', route: '/admin/list/patients' },
+            { name: 'Listar Consultas', route: '/admin/list/appointments' },
           ].map(({ name, route }) => (
             <Link
               key={name}
