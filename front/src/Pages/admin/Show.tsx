@@ -59,13 +59,24 @@ export const Show = ({ columns, rows, type }: Props) => {
     setPage(0);
   };
 
+  function correctText (){
+
+     if(type==='as consultas'){
+       return 'Essas são ' + type;
+     }else{
+      return 'Esses são ' + type;
+     }
+  }
+  //<Typography variant="h3">Esses são {type}.</Typography>
+ 
+
   return (
     <>
       <AppTopBar />
       <Container className={container}>
         <Paper className={paper} elevation={3}>
           <main className={main}>
-            <Typography variant="h3">Essas são {type}.</Typography>
+            <Typography variant="h3">{correctText()}.</Typography>
             <article style={{ width: '100%' }}>
               <header>
                 <div>

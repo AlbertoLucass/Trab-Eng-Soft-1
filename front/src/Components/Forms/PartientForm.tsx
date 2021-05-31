@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     alignItems: 'stretch',
     alignContent: 'space-around',
     flexWrap: 'nowrap',
+    marginBottom: '-1%',
   },
 });
 
