@@ -13,7 +13,8 @@ Manutenções demandam tempo e corpo técnico para serem realizadas, torna-se ne
   * Pastas foram separadas de acordo com sua funcionalidade
   * Escolha de design simples e reutilizável
   * Documentação completa
+  * Utilização de funcionalidades da biblioteca JS - REACT para reutilização de código e assets
 
 ## Consequences
 
-Manutenção simples, sem necessidade de treinamento prévio por parte do técnico, com design simples, documentação detalhada e pastas distribuídas de acordo com seus respectivos módulos.
+Manutenção simples, sem necessidade de treinamento prévio por parte do técnico, com design simples, padronizado, documentação detalhada e pastas distribuídas de acordo com seus respectivos módulos.
