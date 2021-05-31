@@ -81,19 +81,6 @@ export class AppointmentService {
         Clinic: true,
         Patient: true,
       },
-      where: {
-        OR: {
-          Date: {
-            equals: date,
-          },
-          doctorId: {
-            contains: doctorId,
-          },
-          patientId: {
-            contains: patientId,
-          },
-        },
-      },
     });
   }
 

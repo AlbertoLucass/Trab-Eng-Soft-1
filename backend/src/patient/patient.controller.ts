@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  UseFilters,
 } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
@@ -26,8 +27,10 @@ import {
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '.prisma/client';
 import { JwtAuthGuard, RolesGuard } from '../auth/guards';
+import { HttpExceptionFilter } from '../util/conflictFilter';
 
 @ApiTags('Patient')
+@UseFilters(HttpExceptionFilter)
 @Controller('patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
@@ -41,8 +44,6 @@ export class PatientController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.ADMIN)
   @ApiBearerAuth()
   @ApiUnauthorizedResponse({ description: 'Need authenticated' })
   @ApiForbiddenResponse({ description: 'Need to be an admin or an Doctor' })
