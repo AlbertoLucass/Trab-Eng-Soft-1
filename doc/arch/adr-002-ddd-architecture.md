@@ -1,4 +1,3 @@
-
 # Utilização do Domain Driven Design
 
 ## Status
@@ -15,4 +14,4 @@ Acabamos por seguir como o DDD, que faz uma separação em módulos baseados nos
 
 ## Consequences
 
-Torna o sistema mais fácil de ser expandido, poís os módulos podem ser substituídos, as responsabilidades ficam segregadas por classes seguindo o Solid.
+Torna o sistema mais fácil de ser expandido, poís os módulos podem ser substituídos, cada classe do modulo possui apenas uma responsabilidade e utiliza a injeção de dependências para não acoplar o código.

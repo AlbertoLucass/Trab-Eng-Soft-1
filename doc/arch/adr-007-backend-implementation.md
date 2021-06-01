@@ -22,4 +22,6 @@ Escolhermos por seguir com o Nest pois ele possui uma implementação em typescr
 
 Com o nest escolhidos podemos facilmente implementar o DDD, devido a sua gerência de dependências por injeção e módulos centralizadores.
 
-Além de uma boa velocidade, utilizando o express por debaixo dos panos.
+Boa velocidade, utilizando o express por debaixo dos panos.
+
+Facilidade de testes poís podemos trocar a implementação por meio da injeção de dependências.
