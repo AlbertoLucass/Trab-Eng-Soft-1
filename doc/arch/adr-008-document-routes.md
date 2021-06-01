@@ -15,3 +15,5 @@ Dentre as bibliotecas possíveis o Swagger se torna a melhor opção poís o Nes
 ## Consequences
 
 Uma documentação detalhada e fácil de ser entendida com o desenvolvimento do sistema para ver o estado atual das rotas.
+
+Manutenabilidade das rotas aumentada, póis tem explicado cada possibilidade de resposta e os parâmetros necessários.
