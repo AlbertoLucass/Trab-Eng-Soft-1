@@ -20,3 +20,5 @@ Utilizar o Prisma para a conexão com o banco poís ele possui uma implementaç�
 ## Consequences
 
 Com esta decisão podemos começar a implementação sem se preocupar tanto com o código sql em si poís o prisma faz essa abstração assim diminuindo o numero de erros humanos e a tipagem estrita dos objetos.
+
+Uma maior segurança a sql injection entre outros ataques.
