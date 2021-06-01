@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { toHash } from '../util';
+import { BcryptAdapter } from '../util/bcrypt.adapter';
 import { CreateAdministrationDto } from './dto/create-administration.dto';
 import { UpdateAdministrationDto } from './dto/update-administration.dto';
 
@@ -9,7 +9,7 @@ export class AdministrationService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createAdministrationDto: CreateAdministrationDto) {
-    const hash = await toHash(createAdministrationDto.password);
+    const hash = await BcryptAdapter.toHash(createAdministrationDto.password);
     return this.prisma.adminstration.create({
       data: { ...createAdministrationDto, password: hash },
       select: { name: true, id: true, clinicId: true, email: true },
@@ -44,7 +44,7 @@ export class AdministrationService {
 
   async update(id: string, updateAdministrationDto: UpdateAdministrationDto) {
     if (updateAdministrationDto.password) {
-      updateAdministrationDto.password = await toHash(
+      updateAdministrationDto.password = await BcryptAdapter.toHash(
         updateAdministrationDto.password,
       );
     }

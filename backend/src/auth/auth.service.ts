@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AdministrationService } from '../administration/administration.service';
 import { DoctorService } from '../doctor/doctor.service';
 import { PatientService } from '../patient/patient.service';
+import { BcryptAdapter } from '../util/bcrypt.adapter';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
       return null;
     }
 
-    const isAuth = await compare(password, admin.password);
+    const isAuth = await BcryptAdapter.isEqual(password, admin.password);
 
     if (!isAuth) {
       return null;
