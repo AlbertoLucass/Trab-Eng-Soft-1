@@ -73,8 +73,7 @@ export class AppointmentService {
     });
   }
 
-  findAll(filterAppointmentDto: FilterAppointmentDto): Promise<Appointment[]> {
-    const { date, doctorId, patientId } = filterAppointmentDto;
+  findAll(): Promise<Appointment[]> {
     return this.prisma.appointment.findMany({
       include: {
         Doctor: true,

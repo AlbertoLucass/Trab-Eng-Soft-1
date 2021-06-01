@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
@@ -46,8 +45,8 @@ export class AppointmentController {
 
   @Get()
   @ApiOkResponse({ description: 'Returns all appointments or filters' })
-  findAll(@Query() filterAppointmentDto: FilterAppointmentDto) {
-    return this.appointmentService.findAll(filterAppointmentDto);
+  findAll() {
+    return this.appointmentService.findAll();
   }
 
   @Get(':id')

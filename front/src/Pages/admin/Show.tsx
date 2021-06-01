@@ -59,16 +59,14 @@ export const Show = ({ columns, rows, type }: Props) => {
     setPage(0);
   };
 
-  function correctText (){
-
-     if(type==='as consultas'){
-       return 'Essas são ' + type;
-     }else{
+  function correctText() {
+    if (type === 'as consultas') {
+      return 'Essas são ' + type;
+    } else {
       return 'Esses são ' + type;
-     }
+    }
   }
-  //<Typography variant="h3">Esses são {type}.</Typography>
- 
+  <Typography variant="h3">Esses são {type}.</Typography>;
 
   return (
     <>
