@@ -1,5 +1,5 @@
 
-# Utilização do Domain Driven Design 
+# Utilização do Domain Driven Design
 
 ## Status
 
