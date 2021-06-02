@@ -10,7 +10,7 @@ Com a Api em desenvolvimento precisamos de uma maneira de documentar as rotas pa
 
 ## Decision
 
-Dentre as bibliotecas possíveis o Swagger se torna a melhor opção poís o Nest facilita sua implementação.
+Dentre as bibliotecas possíveis o Swagger se torna a melhor opção pois o Nest facilita sua implementação.
 
 ## Consequences
 
